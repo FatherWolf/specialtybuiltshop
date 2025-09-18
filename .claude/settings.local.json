@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx next build:*)",
+      "Bash(timeout 30s npm run build)",
+      "Bash(npm start)",
+      "Bash(npm run lint)",
+      "Bash(timeout 60s npm run build)",
+      "Bash(npx tsc:*)",
+      "Bash(timeout 120s npm run build)",
+      "Bash(/bashes)",
+      "Bash(node test-shopify.js)",
+      "Bash(node test-products.js)",
+      "Bash(git checkout:*)",
+      "Bash(git restore:*)",
+      "Bash(while read file)",
+      "Bash(done)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

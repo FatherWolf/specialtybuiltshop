@@ -1,0 +1,44 @@
+# Specialty Built Performance and Fab - Environment Variables Template
+# Copy this to .env.local and fill in your actual values
+
+# ===== SHOPIFY CONFIGURATION =====
+# Your Shopify store domain (found in Shopify admin)
+SHOPIFY_STORE_DOMAIN=specialty-built.myshopify.com
+
+# Shopify Storefront Access Token (for public access to products)
+# Create in: Shopify Admin > Apps > Manage private apps > Create private app
+# Enable Storefront API and generate token
+SHOPIFY_ACCESS_TOKEN=your_shopify_storefront_access_token_here
+
+# Shopify API credentials (for admin access if needed)
+SHOPIFY_API_KEY=your_shopify_api_key_here
+SHOPIFY_API_SECRET=your_shopify_api_secret_here
+
+# ===== EMAIL CONFIGURATION =====
+# Gmail account for sending contact form emails
+GMAIL_USER=dan@specialtybuilt.com
+
+# Gmail App Password (NOT your regular password)
+# Generate at: Google Account > Security > 2-Step Verification > App passwords
+# Use 16-character app password, not your regular Gmail password
+GMAIL_APP_PASSWORD=your_16_character_gmail_app_password
+
+# Email address where contact form submissions will be sent
+NEXT_PUBLIC_CONTACT_EMAIL=dan@specialtybuilt.com
+
+# ===== NEXTAUTH CONFIGURATION =====
+# Your website URL (replace with your actual domain)
+NEXTAUTH_URL=https://your-domain.com
+
+# Random secret string for NextAuth (generate a secure random string)
+# You can generate one at: https://generate-secret.vercel.app/32
+NEXTAUTH_SECRET=your_secure_random_string_here
+
+# ===== EXAMPLE FILLED VALUES (REMOVE WHEN USING) =====
+# SHOPIFY_STORE_DOMAIN=specialty-built.myshopify.com
+# SHOPIFY_ACCESS_TOKEN=your_shopify_access_token_here
+# GMAIL_USER=dan@specialtybuilt.com
+# GMAIL_APP_PASSWORD=abcd efgh ijkl mnop
+# NEXT_PUBLIC_CONTACT_EMAIL=dan@specialtybuilt.com
+# NEXTAUTH_URL=https://specialtybuilt.com
+# NEXTAUTH_SECRET=abc123def456ghi789jkl012mno345pqr678
