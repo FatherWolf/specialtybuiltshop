@@ -17,7 +17,10 @@
       "Bash(git checkout:*)",
       "Bash(git restore:*)",
       "Bash(while read file)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
