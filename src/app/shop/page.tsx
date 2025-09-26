@@ -20,15 +20,16 @@ export default function Shop() {
 
   useEffect(() => {
     if (!mounted) return
-    
+
     async function fetchProducts() {
       try {
-        // For static export, use fallback data instead of API call  
-        // const response = await fetch('/api/products')
-        const response = { ok: false }
+        // Try to fetch from Shopify first
+        const response = await fetch('/api/products')
         if (response.ok) {
           const shopifyProducts = await response.json()
-          setProducts(shopifyProducts)
+          if (shopifyProducts && shopifyProducts.length > 0) {
+            setProducts(shopifyProducts)
+          }
         }
       } catch (error) {
         console.error('Error fetching products:', error)

@@ -8,9 +8,9 @@ type ShopifyImage = any
 type ShopifyVariant = any
 
 const client = Client.buildClient({
-  domain: process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN || 'your-shop-name.myshopify.com',
-  storefrontAccessToken: process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN || 'your-access-token',
-  apiVersion: '2023-10'
+  domain: process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN || 'specialty-built.myshopify.com',
+  storefrontAccessToken: process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN || '',
+  apiVersion: '2024-01'
 })
 
 export default client
@@ -89,7 +89,7 @@ export async function getProduct(handle: string): Promise<Product | null> {
   try {
     const products = await client.product.fetchByHandle(handle)
     if (!products) return null
-    
+
     const product = products as ShopifyProduct
     return {
       id: product.id,
@@ -123,6 +123,22 @@ export async function getProduct(handle: string): Promise<Product | null> {
     }
   } catch (error) {
     console.error('Error fetching product:', error)
+    return null
+  }
+}
+
+export async function createCheckout(variantId: string, quantity: number = 1) {
+  try {
+    const checkout = await client.checkout.create()
+    const checkoutWithLineItem = await client.checkout.addLineItems(checkout.id, [
+      {
+        variantId: variantId,
+        quantity: quantity
+      }
+    ])
+    return checkoutWithLineItem
+  } catch (error) {
+    console.error('Error creating checkout:', error)
     return null
   }
 }

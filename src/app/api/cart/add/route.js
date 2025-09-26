@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 
-const SHOPIFY_STORE_DOMAIN = process.env.SHOPIFY_STORE_DOMAIN;
-const SHOPIFY_ACCESS_TOKEN = process.env.SHOPIFY_ACCESS_TOKEN;
+const SHOPIFY_STORE_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN;
+const SHOPIFY_STOREFRONT_ACCESS_TOKEN = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
 export async function POST(request) {
   try {
-    if (!SHOPIFY_STORE_DOMAIN || !SHOPIFY_ACCESS_TOKEN) {
+    if (!SHOPIFY_STORE_DOMAIN || !SHOPIFY_STOREFRONT_ACCESS_TOKEN) {
       return NextResponse.json(
         { error: 'Missing Shopify configuration' },
         { status: 500 }
@@ -21,56 +21,75 @@ export async function POST(request) {
       );
     }
 
-    // Create a draft order for the customer
-    const draftOrderResponse = await fetch(`https://${SHOPIFY_STORE_DOMAIN}/admin/api/2024-01/draft_orders.json`, {
+    // Create checkout using Storefront API GraphQL
+    const checkoutCreateMutation = `
+      mutation checkoutCreate($input: CheckoutCreateInput!) {
+        checkoutCreate(input: $input) {
+          checkout {
+            id
+            webUrl
+            totalPrice {
+              amount
+              currencyCode
+            }
+          }
+          checkoutUserErrors {
+            field
+            message
+          }
+        }
+      }
+    `;
+
+    const variables = {
+      input: {
+        lineItems: [
+          {
+            variantId: variantId,
+            quantity: quantity
+          }
+        ]
+      }
+    };
+
+    const response = await fetch(`https://${SHOPIFY_STORE_DOMAIN}/api/2024-01/graphql.json`, {
       method: 'POST',
       headers: {
-        'X-Shopify-Access-Token': SHOPIFY_ACCESS_TOKEN,
+        'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_ACCESS_TOKEN,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        draft_order: {
-          line_items: [
-            {
-              variant_id: variantId,
-              quantity: quantity
-            }
-          ]
-        }
+        query: checkoutCreateMutation,
+        variables: variables
       })
     });
 
-    if (!draftOrderResponse.ok) {
-      throw new Error(`Shopify API error: ${draftOrderResponse.status}`);
+    if (!response.ok) {
+      throw new Error(`Shopify API error: ${response.status}`);
     }
 
-    const draftOrder = await draftOrderResponse.json();
-    
-    // Complete the draft order to create a checkout URL
-    const completeResponse = await fetch(`https://${SHOPIFY_STORE_DOMAIN}/admin/api/2024-01/draft_orders/${draftOrder.draft_order.id}/complete.json`, {
-      method: 'PUT',
-      headers: {
-        'X-Shopify-Access-Token': SHOPIFY_ACCESS_TOKEN,
-        'Content-Type': 'application/json',
-      }
-    });
+    const data = await response.json();
 
-    if (!completeResponse.ok) {
-      throw new Error(`Failed to complete draft order: ${completeResponse.status}`);
+    if (data.errors) {
+      throw new Error(`GraphQL errors: ${JSON.stringify(data.errors)}`);
     }
 
-    const completedOrder = await completeResponse.json();
+    const { checkout, checkoutUserErrors } = data.data.checkoutCreate;
+
+    if (checkoutUserErrors.length > 0) {
+      throw new Error(`Checkout errors: ${JSON.stringify(checkoutUserErrors)}`);
+    }
 
     return NextResponse.json({
       success: true,
-      checkoutUrl: `https://${SHOPIFY_STORE_DOMAIN}/checkout/${completedOrder.draft_order.checkout?.token || ''}`,
-      order: completedOrder.draft_order
+      checkoutUrl: checkout.webUrl,
+      checkout: checkout
     });
 
   } catch (error) {
     console.error('Error adding to cart:', error);
     return NextResponse.json(
-      { error: 'Failed to add item to cart' },
+      { error: 'Failed to add item to cart', details: error.message },
       { status: 500 }
     );
   }
