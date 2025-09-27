@@ -21,19 +21,21 @@ export async function POST(request) {
       );
     }
 
-    // Create checkout using Storefront API GraphQL
-    const checkoutCreateMutation = `
-      mutation checkoutCreate($input: CheckoutCreateInput!) {
-        checkoutCreate(input: $input) {
-          checkout {
+    // Create cart using Storefront API GraphQL
+    const cartCreateMutation = `
+      mutation cartCreate($input: CartInput!) {
+        cartCreate(input: $input) {
+          cart {
             id
-            webUrl
-            totalPrice {
-              amount
-              currencyCode
+            checkoutUrl
+            cost {
+              totalAmount {
+                amount
+                currencyCode
+              }
             }
           }
-          checkoutUserErrors {
+          userErrors {
             field
             message
           }
@@ -43,9 +45,9 @@ export async function POST(request) {
 
     const variables = {
       input: {
-        lineItems: [
+        lines: [
           {
-            variantId: variantId,
+            merchandiseId: variantId,
             quantity: quantity
           }
         ]
@@ -59,7 +61,7 @@ export async function POST(request) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        query: checkoutCreateMutation,
+        query: cartCreateMutation,
         variables: variables
       })
     });
@@ -74,16 +76,16 @@ export async function POST(request) {
       throw new Error(`GraphQL errors: ${JSON.stringify(data.errors)}`);
     }
 
-    const { checkout, checkoutUserErrors } = data.data.checkoutCreate;
+    const { cart, userErrors } = data.data.cartCreate;
 
-    if (checkoutUserErrors.length > 0) {
-      throw new Error(`Checkout errors: ${JSON.stringify(checkoutUserErrors)}`);
+    if (userErrors.length > 0) {
+      throw new Error(`Cart errors: ${JSON.stringify(userErrors)}`);
     }
 
     return NextResponse.json({
       success: true,
-      checkoutUrl: checkout.webUrl,
-      checkout: checkout
+      checkoutUrl: cart.checkoutUrl,
+      cart: cart
     });
 
   } catch (error) {
