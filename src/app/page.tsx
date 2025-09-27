@@ -69,20 +69,13 @@ export default function Home() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/images/trucks/EUEY3750.JPG.jpeg"
+            src="/images/trucks/IMG_0740.JPG.jpeg"
             alt="Specialty Built Diesel Truck"
             className="w-full h-full object-cover"
+            loading="eager"
+            fetchPriority="high"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/70 via-blue-900/70 to-teal-800/70"></div>
-        </div>
-
-        {/* Logo Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center z-5">
-          <img
-            src="/logo.png"
-            alt="Specialty Built Logo"
-            className="w-96 h-auto opacity-10"
-          />
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/60 via-blue-900/60 to-teal-800/60"></div>
         </div>
 
         <div className="container mx-auto px-6 relative z-10 h-full flex items-center">
@@ -96,12 +89,12 @@ export default function Home() {
               Specialty Built
             </h1>
             <h2 className="text-2xl md:text-4xl font-semibold mb-4 text-white">
-              Performance & Fab
+              Performance Parts & Custom Fabrication
             </h2>
             <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl">
-              Expert Diesel Repair & Custom Fabrication
+              Premium Diesel Performance Parts & Custom Solutions
               <br />
-              <span className="text-lg text-teal-300">Duramax • Cummins • Powerstroke • 4+ Years Experience</span>
+              <span className="text-lg text-teal-300">Duramax • Cummins • Powerstroke • Custom Fab Services</span>
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <motion.button
@@ -109,14 +102,14 @@ export default function Home() {
                 whileTap={{ scale: 0.95 }}
                 className="bg-gradient-to-r from-purple-500 to-teal-600 hover:from-purple-600 hover:to-teal-700 text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 shadow-xl"
               >
-                Get A Quote Today
+                Shop Parts Now
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="border-2 border-white/50 hover:border-white bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300"
               >
-                View Our Work
+                Custom Fabrication
               </motion.button>
             </div>
           </motion.div>
@@ -127,30 +120,30 @@ export default function Home() {
       <section className="py-20 bg-gradient-to-r from-purple-900/20 to-teal-900/20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Services</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Premium Diesel Parts</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Expert diesel repair specializing in Duramax, Cummins, and Powerstroke engines with custom fabrication services.
+              High-performance diesel parts and custom fabrication solutions for Duramax, Cummins, and Powerstroke engines.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                title: "Diesel Engine Repair",
-                description: "Specialized repair services for Duramax, Cummins, and Powerstroke engines with 4+ years experience.",
-                icon: "🔧",
+                title: "Performance Parts",
+                description: "Premium diesel performance parts for Duramax, Cummins, and Powerstroke engines. Turbos, injectors, exhaust systems and more.",
+                icon: "⚡",
                 image: "/images/parts-engines/IMG_1762.jpg"
               },
               {
                 title: "Custom Fabrication",
-                description: "Professional custom fabrication services with FABMD partnership for precision metalwork.",
-                icon: "⚙️",
+                description: "Bespoke diesel parts and components fabricated to your exact specifications with FABMD partnership quality.",
+                icon: "🔨",
                 image: "/images/parts-engines/IMG_2948.jpg"
               },
               {
-                title: "Performance Upgrades",
-                description: "Diesel performance modifications and bulletproofing to maximize your truck's potential.",
-                icon: "🚛",
+                title: "Complete Kits",
+                description: "Full performance upgrade packages and bulletproofing kits designed to maximize your diesel's potential.",
+                icon: "📦",
                 image: "/images/trucks/IMG_0740.JPG.jpeg"
               }
             ].map((service, index) => (
@@ -182,13 +175,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Work Showcase Section */}
+      {/* Parts Showcase Section */}
       <section className="py-20 bg-gray-900">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Recent Work</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Featured Parts & Builds</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Take a look at some of our latest diesel repair and custom fabrication projects.
+              Check out our latest custom parts, performance upgrades, and complete build packages.
             </p>
           </div>
 
@@ -196,18 +189,18 @@ export default function Home() {
             {[
               {
                 image: "/images/parts-engines/IMG_3027 (1).jpg",
-                title: "Engine Rebuild",
-                description: "Complete Duramax engine rebuild with performance upgrades"
+                title: "Performance Engine Package",
+                description: "Complete Duramax performance upgrade kit with custom parts"
               },
               {
                 image: "/images/trucks/IMG_0749.JPG.jpeg",
-                title: "Custom Truck Build",
-                description: "Full custom diesel truck build with performance modifications"
+                title: "Custom Performance Build",
+                description: "Full performance package installation with Specialty Built parts"
               },
               {
                 image: "/images/parts-engines/IMG_0740.JPG.jpeg",
-                title: "Fabrication Work",
-                description: "Custom metal fabrication for diesel performance parts"
+                title: "Custom Fabricated Parts",
+                description: "Bespoke diesel performance components designed and fabricated in-house"
               }
             ].map((work, index) => (
               <motion.div
@@ -296,16 +289,16 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Need Diesel Repair or Custom Fab?</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Upgrade Your Diesel?</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Get expert diesel repair and custom fabrication services from Specialty Built Performance & Fab.
+              Shop premium diesel performance parts or get custom fabrication solutions from Specialty Built Performance & Fab.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-white text-purple-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 shadow-xl"
             >
-              Contact Us Today
+              Shop Parts Now
             </motion.button>
           </motion.div>
         </div>
