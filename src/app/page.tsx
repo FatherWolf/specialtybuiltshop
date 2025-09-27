@@ -65,7 +65,7 @@ export default function Home() {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white py-32">
+      <section className="relative bg-gradient-to-br from-purple-900 via-blue-900 to-teal-800 text-white py-32">
         <div className="absolute inset-0 bg-[url('/hero-pattern.svg')] opacity-10"></div>
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
@@ -74,7 +74,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent">
               Specialty Built
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-slate-300">
@@ -83,7 +83,7 @@ export default function Home() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 shadow-xl"
+              className="bg-gradient-to-r from-purple-500 to-teal-600 hover:from-purple-600 hover:to-teal-700 text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 shadow-xl"
             >
               Get A Quote Today
             </motion.button>
@@ -92,11 +92,11 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-20 bg-gradient-to-r from-purple-50 to-teal-50">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Our Services</h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-purple-900 mb-4">Our Services</h2>
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               Expert diesel repair specializing in Duramax, Cummins, and Powerstroke engines with custom fabrication services.
             </p>
           </div>
@@ -127,8 +127,8 @@ export default function Home() {
                 className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-2xl font-bold text-slate-800 mb-3">{service.title}</h3>
-                <p className="text-slate-600">{service.description}</p>
+                <h3 className="text-2xl font-bold text-purple-800 mb-3">{service.title}</h3>
+                <p className="text-gray-600">{service.description}</p>
               </motion.div>
             ))}
           </div>
@@ -139,8 +139,8 @@ export default function Home() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Featured Products</h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-purple-900 mb-4">Featured Products</h2>
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               Shop our premium Specialty Built merchandise and diesel performance gear.
             </p>
           </div>
@@ -169,13 +169,13 @@ export default function Home() {
                   )}
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-slate-800 mb-2">{product.title}</h3>
-                  <p className="text-slate-600 mb-4 line-clamp-2">{product.body_html?.replace(/<[^>]*>/g, '') || product.description}</p>
+                  <h3 className="text-xl font-bold text-purple-800 mb-2">{product.title}</h3>
+                  <p className="text-gray-600 mb-4 line-clamp-2">{product.body_html?.replace(/<[^>]*>/g, '') || product.description}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-blue-600">
+                    <span className="text-2xl font-bold text-teal-600">
                       ${product.variants?.[0]?.price || '29.99'}
                     </span>
-                    <button className="flex items-center text-blue-600 hover:text-blue-700 font-medium">
+                    <button className="flex items-center text-purple-600 hover:text-purple-700 font-medium">
                       View Details
                       <ChevronRightIcon className="w-4 h-4 ml-1" />
                     </button>
@@ -188,7 +188,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-700 text-white">
+      <section className="py-20 bg-gradient-to-r from-purple-600 to-teal-700 text-white">
         <div className="container mx-auto px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -202,7 +202,7 @@ export default function Home() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-white text-blue-600 hover:bg-slate-100 font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 shadow-xl"
+              className="bg-white text-purple-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 shadow-xl"
             >
               Contact Us Today
             </motion.button>
