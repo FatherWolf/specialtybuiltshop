@@ -13,9 +13,9 @@ export default function CartIcon({ onClick }: CartIconProps) {
   return (
     <button
       onClick={onClick}
-      className="relative p-2 hover:bg-accent rounded-lg transition-colors"
+      className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors"
     >
-      <ShoppingCart className="w-6 h-6 text-foreground" />
+      <ShoppingCart className="w-6 h-6 text-gray-700" />
       {totalItems > 0 && (
         <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
           {totalItems > 99 ? '99+' : totalItems}
