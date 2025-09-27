@@ -61,7 +61,7 @@ export default function Home() {
   if (!isMounted) return null;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gray-900">
       <Header />
       
       {/* Hero Section */}
@@ -92,11 +92,11 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-gradient-to-r from-purple-50 to-teal-50">
+      <section className="py-20 bg-gradient-to-r from-purple-900/20 to-teal-900/20">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-purple-900 mb-4">Our Services</h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Services</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Expert diesel repair specializing in Duramax, Cummins, and Powerstroke engines with custom fabrication services.
             </p>
           </div>
@@ -124,11 +124,11 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300"
+                className="bg-gray-800 rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300 border border-purple-500/20"
               >
                 <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-2xl font-bold text-purple-800 mb-3">{service.title}</h3>
-                <p className="text-gray-600">{service.description}</p>
+                <h3 className="text-2xl font-bold text-purple-300 mb-3">{service.title}</h3>
+                <p className="text-gray-300">{service.description}</p>
               </motion.div>
             ))}
           </div>
@@ -136,11 +136,11 @@ export default function Home() {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-900">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-purple-900 mb-4">Featured Products</h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Featured Products</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Shop our premium Specialty Built merchandise and diesel performance gear.
             </p>
           </div>
@@ -152,7 +152,7 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+                className="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer border border-teal-500/20"
                 onClick={() => openProductModal(product)}
               >
                 <div className="aspect-square bg-slate-100 relative">
@@ -169,13 +169,13 @@ export default function Home() {
                   )}
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-purple-800 mb-2">{product.title}</h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">{product.body_html?.replace(/<[^>]*>/g, '') || product.description}</p>
+                  <h3 className="text-xl font-bold text-purple-300 mb-2">{product.title}</h3>
+                  <p className="text-gray-300 mb-4 line-clamp-2">{product.body_html?.replace(/<[^>]*>/g, '') || product.description}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-teal-600">
+                    <span className="text-2xl font-bold text-teal-400">
                       ${product.variants?.[0]?.price || '29.99'}
                     </span>
-                    <button className="flex items-center text-purple-600 hover:text-purple-700 font-medium">
+                    <button className="flex items-center text-purple-400 hover:text-purple-300 font-medium">
                       View Details
                       <ChevronRightIcon className="w-4 h-4 ml-1" />
                     </button>
