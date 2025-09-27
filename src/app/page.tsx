@@ -66,7 +66,7 @@ export default function Home() {
       <Header />
       
       {/* Hero Section with Background Image */}
-      <section className="relative h-screen bg-gradient-to-br from-purple-900/80 via-blue-900/80 to-teal-800/80 text-white overflow-hidden">
+      <section className="relative min-h-screen bg-gradient-to-br from-purple-900/80 via-blue-900/80 to-teal-800/80 text-white overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img
@@ -79,39 +79,39 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-br from-purple-900/60 via-blue-900/60 to-teal-800/60"></div>
         </div>
 
-        <div className="container mx-auto px-6 relative z-10 h-full flex items-center">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10 min-h-screen flex items-center pt-20 pb-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-4xl"
+            className="max-w-4xl w-full"
           >
-            <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent leading-tight">
               Specialty Built
             </h1>
-            <h2 className="text-2xl md:text-4xl font-semibold mb-4 text-white">
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-semibold mb-3 sm:mb-4 text-white leading-snug">
               Performance Parts & Custom Fabrication
             </h2>
-            <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 text-gray-200 max-w-2xl leading-relaxed">
               Premium Diesel Performance Parts & Custom Solutions
-              <br />
-              <span className="text-lg text-teal-300">Duramax • Cummins • Powerstroke • Custom Fab Services</span>
+              <br className="hidden sm:block" />
+              <span className="text-sm sm:text-base md:text-lg text-teal-300 block sm:inline mt-2 sm:mt-0">Duramax • Cummins • Powerstroke • Custom Fab Services</span>
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/shop">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <Link href="/shop" className="w-full sm:w-auto">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-to-r from-purple-500 to-teal-600 hover:from-purple-600 hover:to-teal-700 text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 shadow-xl w-full"
+                  className="bg-gradient-to-r from-purple-500 to-teal-600 hover:from-purple-600 hover:to-teal-700 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg transition-all duration-300 shadow-xl w-full"
                 >
                   Shop Parts Now
                 </motion.button>
               </Link>
-              <Link href="/contact">
+              <Link href="/contact" className="w-full sm:w-auto">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="border-2 border-white/50 hover:border-white bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 w-full"
+                  className="border-2 border-white/50 hover:border-white bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg transition-all duration-300 w-full"
                 >
                   Custom Fabrication
                 </motion.button>
@@ -122,16 +122,16 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-gradient-to-r from-purple-900/20 to-teal-900/20">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Premium Diesel Parts</h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-r from-purple-900/20 to-teal-900/20">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">Premium Diesel Parts</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
               High-performance diesel parts and custom fabrication solutions for Duramax, Cummins, and Powerstroke engines.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
                 title: "Performance Parts",
@@ -181,16 +181,16 @@ export default function Home() {
       </section>
 
       {/* Parts Showcase Section */}
-      <section className="py-20 bg-gray-900">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Featured Parts & Builds</h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+      <section className="py-12 sm:py-16 md:py-20 bg-gray-900">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">Featured Parts & Builds</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
               Check out our latest custom parts, performance upgrades, and complete build packages.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16 md:mb-20">
             {[
               {
                 image: "/images/parts-engines/IMG_3027 (1).jpg",
@@ -235,16 +235,16 @@ export default function Home() {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-20 bg-gradient-to-r from-purple-900/10 to-teal-900/10">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Featured Products</h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-r from-purple-900/10 to-teal-900/10">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10 sm:mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">Featured Products</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
               Shop our premium Specialty Built merchandise and diesel performance gear.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {featuredProducts.map((product, index) => (
               <motion.div
                 key={product.id}
@@ -287,22 +287,22 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-purple-600 to-teal-700 text-white">
-        <div className="container mx-auto px-6 text-center">
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-r from-purple-600 to-teal-700 text-white">
+        <div className="container mx-auto px-4 sm:px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Upgrade Your Diesel?</h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">Ready to Upgrade Your Diesel?</h2>
+            <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
               Shop premium diesel performance parts or get custom fabrication solutions from Specialty Built Performance & Fab.
             </p>
             <Link href="/shop">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-purple-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 shadow-xl"
+                className="bg-white text-purple-600 hover:bg-gray-100 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg transition-all duration-300 shadow-xl"
               >
                 Shop Parts Now
               </motion.button>

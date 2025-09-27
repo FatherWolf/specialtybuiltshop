@@ -54,60 +54,67 @@ export default function Header() {
             </a>
           </div>
 
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-gray-700 hover:text-blue-600 transition-colors"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="md:hidden flex items-center space-x-3">
+            <CartIcon onClick={() => setIsCartOpen(!isCartOpen)} />
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-white hover:text-teal-300 transition-colors"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200">
-            <nav className="flex flex-col space-y-4">
+          <div className="md:hidden py-6 border-t border-purple-500/30 bg-gradient-to-r from-purple-900/95 to-teal-900/95 backdrop-blur-sm">
+            <nav className="flex flex-col space-y-1">
               <Link
                 href="/"
-                className="text-gray-700 hover:text-blue-600 transition-colors py-2"
+                className="text-white hover:text-teal-300 transition-colors py-3 px-4 rounded-lg hover:bg-white/10"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link
                 href="/shop"
-                className="text-gray-700 hover:text-blue-600 transition-colors py-2 font-semibold"
+                className="text-white hover:text-teal-300 transition-colors py-3 px-4 rounded-lg hover:bg-white/10 font-semibold"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Shop
               </Link>
               <Link
                 href="/services"
-                className="text-gray-700 hover:text-blue-600 transition-colors py-2"
+                className="text-white hover:text-teal-300 transition-colors py-3 px-4 rounded-lg hover:bg-white/10"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Services
               </Link>
               <Link
                 href="/about"
-                className="text-gray-700 hover:text-blue-600 transition-colors py-2"
+                className="text-white hover:text-teal-300 transition-colors py-3 px-4 rounded-lg hover:bg-white/10"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </Link>
               <Link
                 href="/contact"
-                className="text-gray-700 hover:text-blue-600 transition-colors py-2"
+                className="text-white hover:text-teal-300 transition-colors py-3 px-4 rounded-lg hover:bg-white/10"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
               </Link>
-              <div className="pt-4 border-t border-gray-200 space-y-4">
-                <div className="flex items-center justify-between">
-                  <CartIcon onClick={() => setIsCartOpen(!isCartOpen)} />
-                  <a href="tel:+19802414823" className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors">
-                    <Phone size={16} />
-                    <span>(980) 241-4823</span>
-                  </a>
-                </div>
+              <div className="pt-4 mt-4 border-t border-purple-500/30">
+                <Link
+                  href="/shop"
+                  className="block bg-teal-600 hover:bg-teal-700 text-white px-4 py-3 rounded-lg font-medium text-center transition-colors mb-4"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Shop Now
+                </Link>
+                <a href="tel:+19802414823" className="flex items-center justify-center space-x-2 text-teal-300 hover:text-white transition-colors py-2">
+                  <Phone size={18} />
+                  <span className="font-medium">(980) 241-4823</span>
+                </a>
               </div>
             </nav>
           </div>
