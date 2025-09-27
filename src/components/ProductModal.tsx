@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ShoppingCart, Plus, Minus, Check } from 'lucide-react'
+import { useCart } from '@/contexts/CartContext'
 
 interface ProductModalProps {
   product: any
@@ -16,6 +17,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
   const [quantity, setQuantity] = useState(1)
   const [productDetails, setProductDetails] = useState<any>(null)
   const [loading, setLoading] = useState(true)
+  const { addItem } = useCart()
 
   useEffect(() => {
     if (isOpen && product) {
@@ -68,33 +70,21 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
     }
   }
 
-  const handleAddToCart = async () => {
+  const handleAddToCart = () => {
     if (!selectedVariant) return;
-    
+
     try {
-      const response = await fetch('/api/cart/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          variantId: selectedVariant.id,
-          quantity: quantity
-        })
+      addItem({
+        id: `${displayProduct.id}-${selectedVariant.id}`,
+        variantId: selectedVariant.id,
+        title: displayProduct.title,
+        price: selectedVariant.price?.amount || selectedVariant.price || '29.99',
+        quantity: quantity,
+        image: displayProduct.images?.[0]?.src || displayProduct.images?.[0]
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        if (data.checkoutUrl) {
-          // Redirect to Shopify checkout
-          window.location.href = data.checkoutUrl;
-        } else {
-          alert(`Added ${quantity}x ${displayProduct.title} to cart!`);
-          onClose();
-        }
-      } else {
-        throw new Error('Failed to add to cart');
-      }
+      alert(`Added ${quantity}x ${displayProduct.title} to cart!`);
+      onClose();
     } catch (error) {
       console.error('Error adding to cart:', error);
       alert('Sorry, there was an error adding the item to your cart. Please try again.');

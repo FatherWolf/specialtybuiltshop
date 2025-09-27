@@ -4,9 +4,11 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X, Phone } from 'lucide-react'
+import CartIcon from './CartIcon'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isCartOpen, setIsCartOpen] = useState(false)
 
   return (
     <header className="bg-accent/95 backdrop-blur-sm border-b border-muted sticky top-0 z-50">
@@ -41,6 +43,7 @@ export default function Header() {
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
+            <CartIcon onClick={() => setIsCartOpen(!isCartOpen)} />
             <Link href="/shop" className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg font-medium text-sm transition-colors">
               Shop Now
             </Link>

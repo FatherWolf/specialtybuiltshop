@@ -43,11 +43,16 @@ export async function POST(request) {
       }
     `;
 
+    // Convert numeric ID to global ID format
+    const globalVariantId = variantId.toString().includes('gid:')
+      ? variantId
+      : `gid://shopify/ProductVariant/${variantId}`;
+
     const variables = {
       input: {
         lines: [
           {
-            merchandiseId: variantId,
+            merchandiseId: globalVariantId,
             quantity: quantity
           }
         ]
