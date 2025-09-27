@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X, Phone } from 'lucide-react'
 import CartIcon from './CartIcon'
+import CartModal from './CartModal'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -99,16 +100,25 @@ export default function Header() {
               >
                 Contact
               </Link>
-              <div className="pt-4 border-t border-muted">
-                <a href="tel:+19802414823" className="flex items-center space-x-2 text-secondary hover:text-primary transition-colors">
-                  <Phone size={16} />
-                  <span>(980) 241-4823</span>
-                </a>
+              <div className="pt-4 border-t border-muted space-y-4">
+                <div className="flex items-center justify-between">
+                  <CartIcon onClick={() => setIsCartOpen(!isCartOpen)} />
+                  <a href="tel:+19802414823" className="flex items-center space-x-2 text-secondary hover:text-primary transition-colors">
+                    <Phone size={16} />
+                    <span>(980) 241-4823</span>
+                  </a>
+                </div>
               </div>
             </nav>
           </div>
         )}
       </div>
+
+      {/* Cart Modal */}
+      <CartModal
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+      />
     </header>
   )
 }
