@@ -78,14 +78,14 @@ export default function Home() {
               Specialty Built
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-slate-300">
-              Premium Custom Solutions for Every Need
+              Performance & Fab - Expert Diesel Repair & Custom Fabrication
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 shadow-xl"
             >
-              Get Started Today
+              Get A Quote Today
             </motion.button>
           </motion.div>
         </div>
@@ -97,26 +97,26 @@ export default function Home() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Our Services</h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              We specialize in delivering high-quality, custom-built solutions tailored to your specific requirements.
+              Expert diesel repair specializing in Duramax, Cummins, and Powerstroke engines with custom fabrication services.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                title: "Custom Design",
-                description: "Tailored designs that perfectly match your vision and brand identity.",
-                icon: "🎨"
+                title: "Diesel Engine Repair",
+                description: "Specialized repair services for Duramax, Cummins, and Powerstroke engines with 4+ years experience.",
+                icon: "🔧"
               },
               {
-                title: "Premium Quality",
-                description: "Using only the finest materials and craftsmanship in every project.",
-                icon: "⭐"
+                title: "Custom Fabrication",
+                description: "Professional custom fabrication services with FABMD partnership for precision metalwork.",
+                icon: "⚙️"
               },
               {
-                title: "Expert Support",
-                description: "Dedicated support team to guide you through every step of the process.",
-                icon: "🛠️"
+                title: "Performance Upgrades",
+                description: "Diesel performance modifications and bulletproofing to maximize your truck's potential.",
+                icon: "🚛"
               }
             ].map((service, index) => (
               <motion.div
@@ -141,7 +141,7 @@ export default function Home() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-4">Featured Products</h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              Discover our premium collection of custom-built products.
+              Shop our premium Specialty Built merchandise and diesel performance gear.
             </p>
           </div>
 
@@ -195,9 +195,9 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Get Started?</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Need Diesel Repair or Custom Fab?</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Let&apos;s bring your vision to life with our premium custom solutions.
+              Get expert diesel repair and custom fabrication services from Specialty Built Performance & Fab.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
