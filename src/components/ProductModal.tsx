@@ -105,22 +105,22 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-background rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-gray-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {loading ? (
               <div className="p-8 text-center">
                 <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full mx-auto"></div>
-                <p className="mt-4 text-foreground/70">Loading product details...</p>
+                <p className="mt-4 text-gray-300">Loading product details...</p>
               </div>
             ) : (
               <>
                 {/* Header */}
-                <div className="flex items-center justify-between p-6 border-b border-muted">
-                  <h2 className="text-2xl font-bold text-foreground">{displayProduct.title}</h2>
+                <div className="flex items-center justify-between p-6 border-b border-gray-600">
+                  <h2 className="text-2xl font-bold text-white">{displayProduct.title}</h2>
                   <button 
                     onClick={onClose}
-                    className="p-2 hover:bg-accent rounded-lg transition-colors"
+                    className="p-2 hover:bg-gray-700 rounded-lg transition-colors text-gray-400 hover:text-white"
                   >
                     <X className="w-6 h-6" />
                   </button>
@@ -167,11 +167,11 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                   {/* Product Details */}
                   <div className="space-y-6">
                     <div>
-                      <div className="text-3xl font-bold text-blue-600 mb-2">
+                      <div className="text-3xl font-bold text-teal-400 mb-2">
                         ${selectedVariant?.price || displayProduct.price || '29.99'}
                       </div>
-                      <div className="text-sm text-slate-600">
-                        <span className="text-green-600 flex items-center">
+                      <div className="text-sm text-gray-400">
+                        <span className="text-green-400 flex items-center">
                           <Check className="w-4 h-4 mr-1" />
                           Available on Shopify
                         </span>
@@ -180,13 +180,13 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
 
                     {/* Product Description */}
                     <div className="prose max-w-none">
-                      <p className="text-slate-700 leading-relaxed">
+                      <p className="text-gray-300 leading-relaxed">
                         {displayProduct.description}
                       </p>
                       {displayProduct.features && (
                         <div className="mt-4">
-                          <h4 className="font-semibold text-slate-800 mb-2">Features:</h4>
-                          <ul className="list-disc list-inside space-y-1 text-slate-600">
+                          <h4 className="font-semibold text-white mb-2">Features:</h4>
+                          <ul className="list-disc list-inside space-y-1 text-gray-300">
                             {displayProduct.features.map((feature: string, index: number) => (
                               <li key={index}>{feature}</li>
                             ))}
@@ -198,7 +198,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                     {/* Color Options */}
                     {variants.length > 0 && (
                       <div>
-                        <h4 className="font-semibold mb-3 text-slate-800">Color Options:</h4>
+                        <h4 className="font-semibold mb-3 text-white">Color Options:</h4>
                         <div className="flex flex-wrap gap-3">
                           {variants.map((variant: any) => (
                             <button
@@ -206,8 +206,8 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                               onClick={() => setSelectedVariant(variant)}
                               className={`flex items-center space-x-2 px-4 py-2 border-2 rounded-lg font-medium transition-all ${
                                 selectedVariant?.id === variant.id
-                                  ? 'border-blue-500 bg-blue-50'
-                                  : 'border-slate-200 hover:border-blue-300'
+                                  ? 'border-purple-500 bg-purple-900/50 text-white'
+                                  : 'border-gray-600 hover:border-purple-400 text-gray-300 hover:text-white'
                               }`}
                             >
                               {variant.color && (
@@ -226,18 +226,18 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
 
                     {/* Quantity Selector */}
                     <div>
-                      <h4 className="font-semibold mb-3">Quantity:</h4>
+                      <h4 className="font-semibold mb-3 text-white">Quantity:</h4>
                       <div className="flex items-center space-x-3">
                         <button
                           onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                          className="p-2 border border-muted rounded-lg hover:border-primary transition-colors"
+                          className="p-2 border border-gray-600 rounded-lg hover:border-purple-400 transition-colors text-gray-300"
                         >
                           <Minus className="w-4 h-4" />
                         </button>
-                        <span className="w-12 text-center font-semibold">{quantity}</span>
+                        <span className="w-12 text-center font-semibold text-white">{quantity}</span>
                         <button
                           onClick={() => setQuantity(quantity + 1)}
-                          className="p-2 border border-muted rounded-lg hover:border-primary transition-colors"
+                          className="p-2 border border-gray-600 rounded-lg hover:border-purple-400 transition-colors text-gray-300"
                         >
                           <Plus className="w-4 h-4" />
                         </button>
@@ -256,12 +256,12 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                       <span>Add to Cart</span>
                     </motion.button>
                     
-                    <div className="text-center text-sm text-slate-500">
+                    <div className="text-center text-sm text-gray-400">
                       Secure checkout powered by Shopify
                     </div>
 
                     {/* Product Details */}
-                    <div className="space-y-2 text-sm text-foreground/70">
+                    <div className="space-y-2 text-sm text-gray-400">
                       <div><strong>Product Type:</strong> {displayProduct.product_type || 'General'}</div>
                       <div><strong>Vendor:</strong> {displayProduct.vendor || 'Specialty Built'}</div>
                       {selectedVariant && selectedVariant.sku && (
