@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ProductModal from '../components/ProductModal';
@@ -97,20 +98,24 @@ export default function Home() {
               <span className="text-lg text-teal-300">Duramax • Cummins • Powerstroke • Custom Fab Services</span>
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-purple-500 to-teal-600 hover:from-purple-600 hover:to-teal-700 text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 shadow-xl"
-              >
-                Shop Parts Now
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="border-2 border-white/50 hover:border-white bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300"
-              >
-                Custom Fabrication
-              </motion.button>
+              <Link href="/shop">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-gradient-to-r from-purple-500 to-teal-600 hover:from-purple-600 hover:to-teal-700 text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 shadow-xl w-full"
+                >
+                  Shop Parts Now
+                </motion.button>
+              </Link>
+              <Link href="/contact">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="border-2 border-white/50 hover:border-white bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 w-full"
+                >
+                  Custom Fabrication
+                </motion.button>
+              </Link>
             </div>
           </motion.div>
         </div>
@@ -293,13 +298,15 @@ export default function Home() {
             <p className="text-xl mb-8 max-w-2xl mx-auto">
               Shop premium diesel performance parts or get custom fabrication solutions from Specialty Built Performance & Fab.
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-purple-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 shadow-xl"
-            >
-              Shop Parts Now
-            </motion.button>
+            <Link href="/shop">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white text-purple-600 hover:bg-gray-100 font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 shadow-xl"
+              >
+                Shop Parts Now
+              </motion.button>
+            </Link>
           </motion.div>
         </div>
       </section>
