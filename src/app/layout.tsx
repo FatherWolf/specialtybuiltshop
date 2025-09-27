@@ -14,15 +14,28 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Specialty Built Performance and Fab - Diesel Repair & Custom Fabrication",
-  description: "Expert diesel repair specializing in Duramax, Cummins, and Powerstroke engines. Custom fabrication services with FABMD partnership. 4+ years experience in diesel performance.",
-  keywords: "diesel repair, Duramax specialist, Cummins repair, Powerstroke bulletproofing, custom fabrication, diesel performance, FABMD partnership",
+  title: "Specialty Built Performance and Fab - Diesel Parts & Custom Fabrication",
+  description: "Premium diesel performance parts for Duramax, Cummins, and Powerstroke engines. Custom fabrication services with FABMD partnership. Shop diesel parts online.",
+  keywords: "diesel parts, performance parts, Duramax parts, Cummins parts, Powerstroke parts, custom fabrication, diesel performance, turbo, injectors",
   authors: [{ name: "Dan - Specialty Built Performance and Fab" }],
+  icons: {
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
+  },
   openGraph: {
-    title: "Specialty Built Performance and Fab - Diesel Repair & Custom Fabrication",
-    description: "Expert diesel repair specializing in Duramax, Cummins, and Powerstroke engines. Custom fabrication services with FABMD partnership.",
+    title: "Specialty Built Performance and Fab - Diesel Parts & Custom Fabrication",
+    description: "Premium diesel performance parts for Duramax, Cummins, and Powerstroke engines. Custom fabrication services with FABMD partnership.",
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: '/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'Specialty Built Performance and Fab Logo',
+      },
+    ],
   },
 };
 
