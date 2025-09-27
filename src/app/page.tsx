@@ -64,29 +64,61 @@ export default function Home() {
     <div className="min-h-screen bg-gray-900">
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-purple-900 via-blue-900 to-teal-800 text-white py-32">
-        <div className="absolute inset-0 bg-[url('/hero-pattern.svg')] opacity-10"></div>
-        <div className="container mx-auto px-6 relative z-10">
+      {/* Hero Section with Background Image */}
+      <section className="relative h-screen bg-gradient-to-br from-purple-900/80 via-blue-900/80 to-teal-800/80 text-white overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/images/trucks/EUEY3750.JPG.jpeg"
+            alt="Specialty Built Diesel Truck"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/70 via-blue-900/70 to-teal-800/70"></div>
+        </div>
+
+        {/* Logo Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center z-5">
+          <img
+            src="/logo.png"
+            alt="Specialty Built Logo"
+            className="w-96 h-auto opacity-10"
+          />
+        </div>
+
+        <div className="container mx-auto px-6 relative z-10 h-full flex items-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center max-w-4xl mx-auto"
+            className="max-w-4xl"
           >
-            <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent">
+            <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent">
               Specialty Built
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-slate-300">
-              Performance & Fab - Expert Diesel Repair & Custom Fabrication
+            <h2 className="text-2xl md:text-4xl font-semibold mb-4 text-white">
+              Performance & Fab
+            </h2>
+            <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl">
+              Expert Diesel Repair & Custom Fabrication
+              <br />
+              <span className="text-lg text-teal-300">Duramax • Cummins • Powerstroke • 4+ Years Experience</span>
             </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-purple-500 to-teal-600 hover:from-purple-600 hover:to-teal-700 text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 shadow-xl"
-            >
-              Get A Quote Today
-            </motion.button>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-purple-500 to-teal-600 hover:from-purple-600 hover:to-teal-700 text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 shadow-xl"
+              >
+                Get A Quote Today
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="border-2 border-white/50 hover:border-white bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300"
+              >
+                View Our Work
+              </motion.button>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -106,17 +138,20 @@ export default function Home() {
               {
                 title: "Diesel Engine Repair",
                 description: "Specialized repair services for Duramax, Cummins, and Powerstroke engines with 4+ years experience.",
-                icon: "🔧"
+                icon: "🔧",
+                image: "/images/parts-engines/IMG_1762.jpg"
               },
               {
                 title: "Custom Fabrication",
                 description: "Professional custom fabrication services with FABMD partnership for precision metalwork.",
-                icon: "⚙️"
+                icon: "⚙️",
+                image: "/images/parts-engines/IMG_2948.jpg"
               },
               {
                 title: "Performance Upgrades",
                 description: "Diesel performance modifications and bulletproofing to maximize your truck's potential.",
-                icon: "🚛"
+                icon: "🚛",
+                image: "/images/trucks/IMG_0740.JPG.jpeg"
               }
             ].map((service, index) => (
               <motion.div
@@ -124,11 +159,77 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-gray-800 rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300 border border-purple-500/20"
+                className="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-purple-500/20 group"
               >
-                <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-2xl font-bold text-purple-300 mb-3">{service.title}</h3>
-                <p className="text-gray-300">{service.description}</p>
+                {/* Service Image */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4 text-4xl">{service.icon}</div>
+                </div>
+                {/* Service Content */}
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold text-purple-300 mb-3">{service.title}</h3>
+                  <p className="text-gray-300">{service.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Work Showcase Section */}
+      <section className="py-20 bg-gray-900">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Recent Work</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Take a look at some of our latest diesel repair and custom fabrication projects.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+            {[
+              {
+                image: "/images/parts-engines/IMG_3027 (1).jpg",
+                title: "Engine Rebuild",
+                description: "Complete Duramax engine rebuild with performance upgrades"
+              },
+              {
+                image: "/images/trucks/IMG_0749.JPG.jpeg",
+                title: "Custom Truck Build",
+                description: "Full custom diesel truck build with performance modifications"
+              },
+              {
+                image: "/images/parts-engines/IMG_0740.JPG.jpeg",
+                title: "Fabrication Work",
+                description: "Custom metal fabrication for diesel performance parts"
+              }
+            ].map((work, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300"
+              >
+                <div className="aspect-square overflow-hidden">
+                  <img
+                    src={work.image}
+                    alt={work.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <h3 className="text-xl font-bold text-white mb-2">{work.title}</h3>
+                    <p className="text-gray-300">{work.description}</p>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -136,7 +237,7 @@ export default function Home() {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-20 bg-gray-900">
+      <section className="py-20 bg-gradient-to-r from-purple-900/10 to-teal-900/10">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Featured Products</h2>
