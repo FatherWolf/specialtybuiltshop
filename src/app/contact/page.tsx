@@ -50,12 +50,16 @@ export default function Contact() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify(data),
       })
 
+      const result = await response.json()
+
       if (!response.ok) {
-        throw new Error('Failed to send message')
+        console.error('Formspree error:', result)
+        throw new Error(result.error || 'Failed to send message')
       }
 
       // Success
@@ -66,8 +70,9 @@ export default function Contact() {
       })
       reset() // Clear the form
 
-    } catch {
+    } catch (error) {
       // Error
+      console.error('Form submission error:', error)
       setModal({
         isOpen: true,
         type: 'error',

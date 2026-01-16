@@ -21,7 +21,12 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Read(//c/Users/austi/Pictures/Screenshots/**)"
+      "Read(//c/Users/austi/Pictures/Screenshots/**)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill /F /PID 39008)",
+      "Bash(taskkill //F //PID 39008)",
+      "Bash(taskkill //F //PID 54816)"
     ],
     "deny": [],
     "ask": []
