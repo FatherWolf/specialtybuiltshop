@@ -90,30 +90,30 @@ export default function Home() {
               Specialty Built
             </h1>
             <h2 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-semibold mb-3 sm:mb-4 text-white leading-snug">
-              Performance Parts & Custom Fabrication
+              Expert Diesel Mechanic & Performance Shop
             </h2>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 text-gray-200 max-w-2xl leading-relaxed">
-              Premium Diesel Performance Parts & Custom Solutions
+              Professional Diesel Repair, Maintenance & Performance Upgrades
               <br className="hidden sm:block" />
-              <span className="text-sm sm:text-base md:text-lg text-teal-300 block sm:inline mt-2 sm:mt-0">Duramax • Cummins • Powerstroke • Custom Fab Services</span>
+              <span className="text-sm sm:text-base md:text-lg text-teal-300 block sm:inline mt-2 sm:mt-0">Duramax Specialist • 6.0 Powerstroke Bulletproofing • Cummins Repair</span>
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <Link href="/shop" className="w-full sm:w-auto">
+              <Link href="/contact" className="w-full sm:w-auto">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-gradient-to-r from-purple-500 to-teal-600 hover:from-purple-600 hover:to-teal-700 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg transition-all duration-300 shadow-xl w-full"
                 >
-                  Shop Parts Now
+                  Schedule Repair Service
                 </motion.button>
               </Link>
-              <Link href="/contact" className="w-full sm:w-auto">
+              <Link href="/shop" className="w-full sm:w-auto">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="border-2 border-white/50 hover:border-white bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg transition-all duration-300 w-full"
                 >
-                  Custom Fabrication
+                  Shop Performance Parts
                 </motion.button>
               </Link>
             </div>
@@ -125,30 +125,30 @@ export default function Home() {
       <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-r from-purple-900/20 to-teal-900/20">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">Premium Diesel Parts</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">Expert Diesel Services</h2>
             <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
-              High-performance diesel parts and custom fabrication solutions for Duramax, Cummins, and Powerstroke engines.
+              Professional diesel repair, performance upgrades, and custom fabrication for Duramax, Cummins, and Powerstroke engines.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
-                title: "Performance Parts",
-                description: "Premium diesel performance parts for Duramax, Cummins, and Powerstroke engines. Turbos, injectors, exhaust systems and more.",
-                icon: "⚡",
+                title: "Diesel Repair & Maintenance",
+                description: "Expert diesel mechanic services including diagnostics, maintenance, and repair for all major diesel engines. Duramax specialist with 4+ years experience.",
+                icon: "🔧",
                 image: "/images/parts-engines/IMG_1762.jpg"
               },
               {
-                title: "Custom Fabrication",
-                description: "Bespoke diesel parts and components fabricated to your exact specifications with FABMD partnership quality.",
-                icon: "🔨",
+                title: "Performance Upgrades",
+                description: "Turbo upgrades, injector installations, exhaust systems, and complete performance packages to maximize your diesel's power and efficiency.",
+                icon: "⚡",
                 image: "/images/parts-engines/IMG_2948.jpg"
               },
               {
-                title: "Complete Kits",
-                description: "Full performance upgrade packages and bulletproofing kits designed to maximize your diesel's potential.",
-                icon: "📦",
+                title: "Bulletproofing & Custom Fab",
+                description: "6.0 Powerstroke bulletproofing specialist. Custom fabrication through FABMD partnership for intercooler piping, exhaust, and more.",
+                icon: "🛡️",
                 image: "/images/trucks/IMG_0740.JPG.jpeg"
               }
             ].map((service, index) => (
@@ -184,9 +184,9 @@ export default function Home() {
       <section className="py-12 sm:py-16 md:py-20 bg-gray-900">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">Featured Parts & Builds</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">Recent Work & Projects</h2>
             <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
-              Check out our latest custom parts, performance upgrades, and complete build packages.
+              Check out our recent diesel repairs, performance builds, and custom fabrication projects.
             </p>
           </div>
 
@@ -294,17 +294,17 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">Ready to Upgrade Your Diesel?</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">Need Diesel Repair or Service?</h2>
             <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
-              Shop premium diesel performance parts or get custom fabrication solutions from Specialty Built Performance & Fab.
+              Expert diesel mechanic services for Duramax, Cummins, and Powerstroke. Schedule your repair or performance upgrade today.
             </p>
-            <Link href="/shop">
+            <Link href="/contact">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-white text-purple-600 hover:bg-gray-100 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg transition-all duration-300 shadow-xl"
               >
-                Shop Parts Now
+                Schedule Service Now
               </motion.button>
             </Link>
           </motion.div>
