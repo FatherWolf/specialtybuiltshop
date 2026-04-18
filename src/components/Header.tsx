@@ -32,11 +32,14 @@ export default function Header() {
             <Link href="/shop" className="text-white hover:text-teal-300 transition-colors font-semibold">
               Shop
             </Link>
+            <Link href="/shop" className="text-white hover:text-teal-300 transition-colors">
+              Parts
+            </Link>
+            <Link href="/shop" className="text-white hover:text-teal-300 transition-colors">
+              Apparel
+            </Link>
             <Link href="/services" className="text-white hover:text-teal-300 transition-colors">
               Services
-            </Link>
-            <Link href="/about" className="text-white hover:text-teal-300 transition-colors">
-              About
             </Link>
             <Link href="/contact" className="text-white hover:text-teal-300 transition-colors">
               Contact

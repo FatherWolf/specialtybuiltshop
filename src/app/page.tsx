@@ -90,21 +90,21 @@ export default function Home() {
               Specialty Built
             </h1>
             <h2 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-semibold mb-3 sm:mb-4 text-white leading-snug">
-              Expert Diesel Mechanic & Performance Shop
+              Premium Diesel Performance Parts & Gear
             </h2>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 text-gray-200 max-w-2xl leading-relaxed">
-              Professional Diesel Repair, Maintenance & Performance Upgrades
+              Shop Performance Parts, Upgrade Kits & Specialty Built Apparel
               <br className="hidden sm:block" />
-              <span className="text-sm sm:text-base md:text-lg text-teal-300 block sm:inline mt-2 sm:mt-0">Duramax Specialist • 6.0 Powerstroke Bulletproofing • Cummins Repair</span>
+              <span className="text-sm sm:text-base md:text-lg text-teal-300 block sm:inline mt-2 sm:mt-0">Duramax • Powerstroke • Cummins • Merch & Apparel</span>
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <Link href="/contact" className="w-full sm:w-auto">
+              <Link href="/shop" className="w-full sm:w-auto">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-gradient-to-r from-purple-500 to-teal-600 hover:from-purple-600 hover:to-teal-700 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg transition-all duration-300 shadow-xl w-full"
                 >
-                  Schedule Repair Service
+                  Shop Parts & Gear
                 </motion.button>
               </Link>
               <Link href="/shop" className="w-full sm:w-auto">
@@ -113,7 +113,7 @@ export default function Home() {
                   whileTap={{ scale: 0.95 }}
                   className="border-2 border-white/50 hover:border-white bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg transition-all duration-300 w-full"
                 >
-                  Shop Performance Parts
+                  View Best Sellers
                 </motion.button>
               </Link>
             </div>
@@ -121,115 +121,140 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Shop By Category Section */}
       <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-r from-purple-900/20 to-teal-900/20">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">Expert Diesel Services</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">Shop By Category</h2>
             <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
-              Professional diesel repair, performance upgrades, and custom fabrication for Duramax, Cummins, and Powerstroke engines.
+              Performance parts, upgrade kits, and Specialty Built gear — everything you need to build your rig.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
-                title: "Diesel Repair & Maintenance",
-                description: "Expert diesel mechanic services including diagnostics, maintenance, and repair for all major diesel engines. Duramax specialist with 4+ years experience.",
-                icon: "🔧",
-                image: "/images/parts-engines/IMG_1762.jpg"
-              },
-              {
-                title: "Performance Upgrades",
-                description: "Turbo upgrades, injector installations, exhaust systems, and complete performance packages to maximize your diesel's power and efficiency.",
+                title: "Performance Parts",
+                description: "Turbos, injectors, cold-air intakes, and upgrade kits for Duramax, Cummins, and Powerstroke platforms.",
                 icon: "⚡",
-                image: "/images/parts-engines/IMG_2948.jpg"
+                image: "/images/parts-engines/IMG_2948.jpg",
+                cta: "Shop Parts"
               },
               {
-                title: "Bulletproofing & Custom Fab",
-                description: "6.0 Powerstroke bulletproofing specialist. Custom fabrication through FABMD partnership for intercooler piping, exhaust, and more.",
-                icon: "🛡️",
-                image: "/images/trucks/IMG_0740.JPG.jpeg"
+                title: "Engine Components",
+                description: "Head studs, gaskets, oil coolers, fuel system components, and everything you need for a bulletproof build.",
+                icon: "🔧",
+                image: "/images/parts-engines/IMG_1762.jpg",
+                cta: "Browse Components"
+              },
+              {
+                title: "Apparel & Merch",
+                description: "Premium Specialty Built hats, tees, hoodies, and caps. Rep the brand that builds the horsepower.",
+                icon: "🧢",
+                image: "/images/trucks/IMG_0740.JPG.jpeg",
+                cta: "Shop Merch"
               }
-            ].map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-purple-500/20 group"
-              >
-                {/* Service Image */}
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
-                  <div className="absolute bottom-4 left-4 text-4xl">{service.icon}</div>
-                </div>
-                {/* Service Content */}
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-purple-300 mb-3">{service.title}</h3>
-                  <p className="text-gray-300">{service.description}</p>
-                </div>
-              </motion.div>
+            ].map((category, index) => (
+              <Link key={index} href="/shop" className="block">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  className="bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-purple-500/20 group h-full cursor-pointer"
+                >
+                  {/* Category Image */}
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={category.image}
+                      alt={category.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
+                    <div className="absolute bottom-4 left-4 text-4xl">{category.icon}</div>
+                  </div>
+                  {/* Category Content */}
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-purple-300 mb-3">{category.title}</h3>
+                    <p className="text-gray-300 mb-4">{category.description}</p>
+                    <span className="inline-flex items-center text-teal-400 font-semibold group-hover:text-teal-300">
+                      {category.cta}
+                      <ChevronRightIcon className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </div>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Parts Showcase Section */}
+      {/* Best Sellers / Built With Our Parts */}
       <section className="py-12 sm:py-16 md:py-20 bg-gray-900">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">Recent Work & Projects</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4">Built With Our Parts</h2>
             <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto px-4">
-              Check out our recent diesel repairs, performance builds, and custom fabrication projects.
+              See what customers are building with Specialty Built performance parts and upgrade kits.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16 md:mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10">
             {[
               {
                 image: "/images/parts-engines/IMG_3027 (1).jpg",
-                title: "Performance Engine Package",
-                description: "Complete Duramax performance upgrade kit with custom parts"
+                title: "Duramax Performance Kit",
+                description: "Shop the complete upgrade package"
               },
               {
                 image: "/images/trucks/IMG_0749.JPG.jpeg",
-                title: "Custom Performance Build",
-                description: "Full performance package installation with Specialty Built parts"
+                title: "Powerstroke Bulletproof Bundle",
+                description: "Head studs, gaskets, oil cooler & more"
               },
               {
                 image: "/images/parts-engines/IMG_0740.JPG.jpeg",
-                title: "Custom Fabricated Parts",
-                description: "Bespoke diesel performance components designed and fabricated in-house"
+                title: "Custom Fabricated Components",
+                description: "Intercooler piping, brackets & bespoke parts"
               }
             ].map((work, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300"
-              >
-                <div className="aspect-square overflow-hidden">
-                  <img
-                    src={work.image}
-                    alt={work.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <h3 className="text-xl font-bold text-white mb-2">{work.title}</h3>
-                    <p className="text-gray-300">{work.description}</p>
+              <Link key={index} href="/shop" className="block">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                >
+                  <div className="aspect-square overflow-hidden">
+                    <img
+                      src={work.image}
+                      alt={work.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
                   </div>
-                </div>
-              </motion.div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent">
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <h3 className="text-xl font-bold text-white mb-1">{work.title}</h3>
+                      <p className="text-gray-300 text-sm mb-2">{work.description}</p>
+                      <span className="inline-flex items-center text-teal-400 font-semibold text-sm">
+                        Shop Now
+                        <ChevronRightIcon className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+              </Link>
             ))}
+          </div>
+
+          <div className="text-center">
+            <Link href="/shop">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-purple-500 to-teal-600 hover:from-purple-600 hover:to-teal-700 text-white font-semibold py-3 sm:py-4 px-8 sm:px-10 rounded-full text-base sm:text-lg transition-all duration-300 shadow-xl"
+              >
+                Shop All Products
+              </motion.button>
+            </Link>
           </div>
         </div>
       </section>
@@ -294,19 +319,30 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">Need Diesel Repair or Service?</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">Ready to Upgrade Your Rig?</h2>
             <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-2xl mx-auto px-4">
-              Expert diesel mechanic services for Duramax, Cummins, and Powerstroke. Schedule your repair or performance upgrade today.
+              Premium performance parts, upgrade kits, and Specialty Built apparel — everything ships fast and is built to last.
             </p>
-            <Link href="/contact">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white text-purple-600 hover:bg-gray-100 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg transition-all duration-300 shadow-xl"
-              >
-                Schedule Service Now
-              </motion.button>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
+              <Link href="/shop">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-white text-purple-600 hover:bg-gray-100 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg transition-all duration-300 shadow-xl"
+                >
+                  Shop All Products
+                </motion.button>
+              </Link>
+              <Link href="/contact">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="border-2 border-white/70 hover:border-white bg-transparent hover:bg-white/10 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg transition-all duration-300"
+                >
+                  Questions? Contact Us
+                </motion.button>
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>
