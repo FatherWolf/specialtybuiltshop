@@ -40,10 +40,8 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
             <ul className="space-y-2 text-slate-400">
-              <li>Email: info@specialtybuilt.com</li>
-              <li>Phone: (555) 123-4567</li>
-              <li>Address: 123 Business St</li>
-              <li>City, State 12345</li>
+              <li>Email: dan@specialtybuilt.com</li>
+              <li>Phone: (980) 241-4823</li>
             </ul>
           </div>
         </div>

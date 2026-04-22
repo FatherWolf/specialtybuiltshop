@@ -150,47 +150,63 @@ export default function Shop() {
   const shopifyProductsFormatted = products.map((product: any) => ({
     id: product.id,
     title: product.title,
-    description: product.body_html ? 
-      product.body_html.replace(/<[^>]*>/g, '').substring(0, 200) + '...' : 
+    description: product.body_html ?
+      product.body_html.replace(/<[^>]*>/g, '').substring(0, 200) + '...' :
       'Premium product from Specialty Built',
     handle: product.handle,
+    tags: (product.tags || []).map((t: string) => t.toLowerCase()),
+    productType: (product.product_type || '').toLowerCase(),
     images: product.images || [],
     variants: product.variants || [],
     priceRange: {
-      minVariantPrice: { 
-        amount: product.variants?.[0]?.price || '0.00', 
-        currencyCode: 'USD' 
+      minVariantPrice: {
+        amount: product.variants?.[0]?.price || '0.00',
+        currencyCode: 'USD'
       },
-      maxVariantPrice: { 
-        amount: product.variants?.[0]?.price || '0.00', 
-        currencyCode: 'USD' 
+      maxVariantPrice: {
+        amount: product.variants?.[0]?.price || '0.00',
+        currencyCode: 'USD'
       }
     }
   }))
 
   const displayProducts = shopifyProductsFormatted.length > 0 ? shopifyProductsFormatted : mockProducts
 
-  const categories = ['all', 'parts', 'merchandise']
-  
-  const filteredProducts = filter === 'all' 
-    ? displayProducts 
-    : displayProducts.filter(product => {
-        if (filter === 'parts') {
-          return !product.title.toLowerCase().includes('shirt') && 
-                 !product.title.toLowerCase().includes('hoodie') && 
-                 !product.title.toLowerCase().includes('cap') &&
-                 !product.title.toLowerCase().includes('hat') &&
-                 !product.title.toLowerCase().includes('snap')
-        }
-        if (filter === 'merchandise') {
-          return product.title.toLowerCase().includes('shirt') || 
-                 product.title.toLowerCase().includes('hoodie') || 
-                 product.title.toLowerCase().includes('cap') ||
-                 product.title.toLowerCase().includes('hat') ||
-                 product.title.toLowerCase().includes('snap')
-        }
-        return true
-      })
+  const categories = ['all', 'parts', 'merchandise', 'best-sellers']
+
+  // Filter by Shopify tag or product type. Set tags in Shopify admin:
+  //   parts         → performance parts, engine components, anything mechanical
+  //   apparel       → hats, shirts, hoodies, merch
+  //   best-seller   → featured / top selling products
+  const matchesCategory = (product: any, category: string) => {
+    const tags: string[] = product.tags || []
+    const type: string = product.productType || ''
+
+    if (category === 'parts') {
+      return tags.includes('parts') ||
+             tags.includes('performance') ||
+             type.includes('part') ||
+             type.includes('performance') ||
+             type.includes('engine')
+    }
+    if (category === 'merchandise') {
+      return tags.includes('apparel') ||
+             tags.includes('merch') ||
+             tags.includes('merchandise') ||
+             type.includes('apparel') ||
+             type.includes('merch')
+    }
+    if (category === 'best-sellers') {
+      return tags.includes('best-seller') ||
+             tags.includes('bestseller') ||
+             tags.includes('featured')
+    }
+    return true
+  }
+
+  const filteredProducts = filter === 'all'
+    ? displayProducts
+    : displayProducts.filter(product => matchesCategory(product, filter))
 
   const openProductModal = (product: any) => {
     setSelectedProduct(product)
@@ -242,7 +258,9 @@ export default function Shop() {
                         : 'bg-accent text-foreground hover:bg-muted'
                     }`}
                   >
-                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                    {category === 'best-sellers'
+                      ? 'Best Sellers'
+                      : category.charAt(0).toUpperCase() + category.slice(1)}
                   </button>
                 ))}
               </div>
