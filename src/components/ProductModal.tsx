@@ -132,7 +132,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                     <div className="aspect-square bg-slate-100 rounded-lg overflow-hidden">
                       {images.length > 0 ? (
                         <img
-                          src={images[selectedImage]}
+                          src={typeof images[selectedImage] === 'string' ? images[selectedImage] : images[selectedImage]?.src}
                           alt={displayProduct.title}
                           className="w-full h-full object-cover"
                         />
@@ -142,24 +142,27 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                         </div>
                       )}
                     </div>
-                    
+
                     {images.length > 1 && (
                       <div className="grid grid-cols-4 gap-2">
-                        {images.map((image: string, index: number) => (
-                          <button
-                            key={index}
-                            onClick={() => setSelectedImage(index)}
-                            className={`aspect-square bg-slate-100 rounded-lg overflow-hidden border-2 transition-colors ${
-                              selectedImage === index ? 'border-blue-500' : 'border-transparent hover:border-slate-300'
-                            }`}
-                          >
-                            <img
-                              src={image}
-                              alt={`${displayProduct.title} ${index + 1}`}
-                              className="w-full h-full object-cover"
-                            />
-                          </button>
-                        ))}
+                        {images.map((image: any, index: number) => {
+                          const imgSrc = typeof image === 'string' ? image : image?.src
+                          return (
+                            <button
+                              key={index}
+                              onClick={() => setSelectedImage(index)}
+                              className={`aspect-square bg-slate-100 rounded-lg overflow-hidden border-2 transition-colors ${
+                                selectedImage === index ? 'border-blue-500' : 'border-transparent hover:border-slate-300'
+                              }`}
+                            >
+                              <img
+                                src={imgSrc}
+                                alt={`${displayProduct.title} ${index + 1}`}
+                                className="w-full h-full object-cover"
+                              />
+                            </button>
+                          )
+                        })}
                       </div>
                     )}
                   </div>
