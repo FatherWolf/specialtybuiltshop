@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Users, Award, Wrench, Target, Heart, Truck } from 'lucide-react'
+import { Users, Award, Target, Heart } from 'lucide-react'
 import Header from '../../components/Header'
 
 export default function About() {
@@ -197,68 +197,6 @@ export default function About() {
                 </div>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Our Facility */}
-      <section className="py-24 bg-accent">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                State-of-the-Art <span className="text-primary">Facility</span>
-              </h2>
-              <div className="space-y-4 text-foreground/80">
-                <p>
-                  Our 15,000 square foot facility is equipped with the latest diagnostic equipment, 
-                  precision tools, and fabrication capabilities to handle any diesel project.
-                </p>
-                <ul className="space-y-2">
-                  <li className="flex items-center">
-                    <Wrench className="w-5 h-5 text-secondary mr-3" />
-                    Heavy-duty lifts capable of handling the largest trucks
-                  </li>
-                  <li className="flex items-center">
-                    <Wrench className="w-5 h-5 text-secondary mr-3" />
-                    Computer-controlled dyno for performance testing
-                  </li>
-                  <li className="flex items-center">
-                    <Wrench className="w-5 h-5 text-secondary mr-3" />
-                    Full fabrication shop with welding and machining capabilities
-                  </li>
-                  <li className="flex items-center">
-                    <Wrench className="w-5 h-5 text-secondary mr-3" />
-                    Climate-controlled work bays for precision work
-                  </li>
-                </ul>
-              </div>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-background rounded-lg p-8 text-center"
-            >
-              <Truck className="w-32 h-32 text-primary mx-auto mb-6" />
-              <h3 className="text-xl font-semibold text-foreground mb-3">Visit Our Shop</h3>
-              <p className="text-foreground/70 mb-4">
-                See our facility and capabilities in person. We welcome tours and consultations.
-              </p>
-              <motion.a
-                href="/contact"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-block bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
-              >
-                Schedule a Visit
-              </motion.a>
-            </motion.div>
           </div>
         </div>
       </section>
