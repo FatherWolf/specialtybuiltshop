@@ -3,13 +3,15 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu, X, Phone } from 'lucide-react'
+import { Menu, X, Phone, Trophy } from 'lucide-react'
 import CartIcon from './CartIcon'
 import CartModal from './CartModal'
+import { giveaway, isGiveawayLive } from '../lib/giveaway'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const giveawayLive = isGiveawayLive(giveaway)
 
   return (
     <header className="bg-gradient-to-r from-purple-900/95 to-teal-900/95 backdrop-blur-sm border-b border-purple-700 sticky top-0 z-50">
@@ -41,6 +43,15 @@ export default function Header() {
             <Link href="/contact" className="text-white hover:text-teal-300 transition-colors">
               Contact
             </Link>
+            {giveawayLive && (
+              <Link
+                href="/giveaway"
+                className="inline-flex items-center text-yellow-300 hover:text-yellow-200 transition-colors font-semibold"
+              >
+                <Trophy className="w-4 h-4 mr-1" />
+                Giveaway
+              </Link>
+            )}
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
@@ -103,6 +114,16 @@ export default function Header() {
               >
                 Contact
               </Link>
+              {giveawayLive && (
+                <Link
+                  href="/giveaway"
+                  className="flex items-center text-yellow-300 hover:text-yellow-200 transition-colors py-3 px-4 rounded-lg hover:bg-white/10 font-semibold"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <Trophy className="w-4 h-4 mr-2" />
+                  Giveaway
+                </Link>
+              )}
               <div className="pt-4 mt-4 border-t border-purple-500/30">
                 <Link
                   href="/shop?category=parts"

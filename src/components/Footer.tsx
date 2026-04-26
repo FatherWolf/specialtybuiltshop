@@ -34,6 +34,7 @@ export default function Footer() {
               <li><Link href="/shop?category=apparel" className="text-slate-400 hover:text-white transition-colors">Apparel</Link></li>
               <li><Link href="/about" className="text-slate-400 hover:text-white transition-colors">About</Link></li>
               <li><Link href="/contact" className="text-slate-400 hover:text-white transition-colors">Contact</Link></li>
+              <li><Link href="/giveaway/rules" className="text-slate-400 hover:text-white transition-colors">Sweepstakes Rules</Link></li>
             </ul>
           </div>
           
