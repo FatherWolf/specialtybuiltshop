@@ -33,20 +33,30 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
         })
       })
 
-      if (response.ok) {
-        const data = await response.json()
-        if (data.checkoutUrl) {
-          // Redirect to Shopify checkout with tax and shipping calculated
-          window.location.href = data.checkoutUrl
-        } else {
-          throw new Error('No checkout URL received')
-        }
-      } else {
-        throw new Error('Failed to create checkout')
+      const data = await response.json().catch(() => ({}))
+
+      if (response.ok && data.checkoutUrl) {
+        // Redirect to Shopify checkout with tax and shipping calculated
+        window.location.href = data.checkoutUrl
+        return
       }
+
+      // Surface the real reason — Shopify's userErrors / details bubble through
+      // the API route as `data.details` or `data.error`.
+      const reason =
+        data?.details ||
+        data?.error ||
+        (response.status ? `HTTP ${response.status}` : 'Unknown error')
+
+      console.error('Checkout failed:', { status: response.status, data })
+      alert(
+        `Sorry, we couldn't start your checkout.\n\n${reason}\n\nIf this keeps happening, email dan@specialtybuilt.com.`
+      )
     } catch (error) {
-      console.error('Checkout error:', error)
-      alert('Sorry, there was an error creating your checkout. Please try again.')
+      console.error('Checkout error (network):', error)
+      alert(
+        'Sorry, we couldn\'t reach the checkout service. Please check your connection and try again.'
+      )
     } finally {
       setIsCheckingOut(false)
     }
