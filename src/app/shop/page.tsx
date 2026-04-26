@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { ShoppingCart, Filter } from 'lucide-react'
@@ -19,7 +19,31 @@ const CATEGORY_ALIASES: Record<string, string> = {
   featured: 'best-sellers',
 }
 
+// Next.js 15 requires components that read URL search params via
+// useSearchParams() to be wrapped in a <Suspense> boundary so the rest of
+// the page can be prerendered. The actual shop UI lives in ShopContent —
+// this default export just provides the suspense fallback.
 export default function Shop() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-background">
+          <Header />
+          <section className="py-24 bg-accent">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <div className="h-12 w-64 bg-muted/40 rounded mx-auto mb-4 animate-pulse" />
+              <div className="h-6 w-96 bg-muted/40 rounded mx-auto animate-pulse" />
+            </div>
+          </section>
+        </div>
+      }
+    >
+      <ShopContent />
+    </Suspense>
+  )
+}
+
+function ShopContent() {
   const searchParams = useSearchParams()
   const initialFilter = (() => {
     const c = searchParams.get('category')?.toLowerCase()
