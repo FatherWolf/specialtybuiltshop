@@ -218,8 +218,8 @@ export default function Home() {
               },
               {
                 image: "/images/parts-engines/IMG_0740.JPG.jpeg",
-                title: "Custom Fabricated Components",
-                description: "Intercooler piping, brackets & bespoke parts"
+                title: "Specialty-Built Components",
+                description: "Intercooler piping, brackets & performance hardware"
               }
             ].map((work, index) => (
               <Link key={index} href="/shop?category=parts" className="block">

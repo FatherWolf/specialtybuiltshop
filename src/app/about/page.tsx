@@ -6,18 +6,18 @@ import Header from '../../components/Header'
 
 export default function About() {
   const stats = [
-    { number: "4+", label: "Years Experience" },
-    { number: "500+", label: "Vehicles Serviced" },
-    { number: "100+", label: "Diesel Repairs" },
-    { number: "24/7", label: "Text & Call Support" }
+    { number: "4+", label: "Years of Diesel Experience" },
+    { number: "3", label: "Platforms Covered" },
+    { number: "100%", label: "Hand-Picked Lineup" },
+    { number: "<24h", label: "Avg. Support Reply" }
   ]
 
   const team = [
     {
       name: "Dan",
-      role: "Owner & Diesel Specialist",
-      experience: "4+ years in diesel performance",
-      specialties: ["Duramax Expert", "6.0 Powerstroke Bulletproofing", "Cummins Maintenance"]
+      role: "Owner & Curator",
+      experience: "4+ years hands-on diesel experience",
+      specialties: ["Duramax Knowledge", "Powerstroke Knowledge", "Cummins Knowledge"]
     }
   ]
 
@@ -25,22 +25,22 @@ export default function About() {
     {
       icon: Heart,
       title: "Passion",
-      description: "We live and breathe diesel performance. Every project is a chance to push boundaries."
+      description: "We live and breathe diesel performance. Every product earns its spot in the lineup."
     },
     {
       icon: Award,
-      title: "Excellence",
-      description: "We never compromise on quality. Your diesel deserves nothing but the best."
+      title: "Quality",
+      description: "We never compromise. Your diesel deserves parts and gear built to last."
     },
     {
       icon: Users,
       title: "Community",
-      description: "We're part of the diesel community, supporting enthusiasts and professionals alike."
+      description: "We're part of the diesel community — supporting enthusiasts, builders, and shops alike."
     },
     {
       icon: Target,
-      title: "Innovation",
-      description: "Always exploring new techniques and technologies to deliver superior results."
+      title: "Curation",
+      description: "We only sell what we'd run on our own truck. No filler, no gimmicks."
     }
   ]
 
@@ -61,7 +61,7 @@ export default function About() {
               About <span className="text-primary">Specialty Built</span>
             </h1>
             <p className="text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto">
-              More than just a diesel shop - we&apos;re performance specialists dedicated to maximizing your diesel&apos;s potential.
+              The story behind the parts and apparel — and the diesel mind picking what goes on the shelf.
             </p>
           </motion.div>
         </div>
@@ -81,18 +81,19 @@ export default function About() {
               </h2>
               <div className="space-y-4 text-foreground/80">
                 <p>
-                  Founded by Dan, Specialty Built Performance and Fab began with 4 years of hands-on diesel experience, 
-                  starting with bulletproofing 6.0 Powerstrokes and general maintenance on Duramax and Cummins engines.
+                  Specialty Built started with four years of hands-on diesel work — bulletproofing 6.0 Powerstrokes
+                  and getting elbow-deep in Duramax and Cummins builds. That experience is what shaped the lineup
+                  you see in the shop today.
                 </p>
                 <p>
-                  Over time, Dan developed specialized expertise in Duramax engines, which became his primary area of knowledge. 
-                  While offering work on all three major diesel platforms (Duramax, Cummins, Powerstroke), 
-                  Dan believes in honest service - if he&apos;s not confident in a repair, he&apos;ll refer you to the right specialist.
+                  Dan&apos;s background as a Duramax specialist means every part on the site has been chosen with
+                  builders in mind. We cover all three major diesel platforms — Duramax, Cummins, and Powerstroke —
+                  with parts that hold up under real-world use, not just spec sheets.
                 </p>
                 <p>
-                  Today Specialty Built focuses on bringing that same hands-on diesel expertise to a curated lineup
-                  of performance parts, upgrade kits, and branded apparel — gear chosen because it&apos;s what Dan would
-                  install on his own truck.
+                  Specialty Built is now strictly an online parts and apparel shop. No services, no installs — just
+                  curated gear, fast shipping, and straight answers when you have a question. If we wouldn&apos;t put
+                  it on our own truck, you won&apos;t find it on the site.
                 </p>
               </div>
             </motion.div>
@@ -129,7 +130,7 @@ export default function About() {
               Our <span className="text-primary">Values</span>
             </h2>
             <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              These core values guide everything we do, from simple repairs to complex custom builds
+              What guides what we put in the shop and how we treat every customer.
             </p>
           </motion.div>
 
@@ -163,14 +164,14 @@ export default function About() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
-              Meet the <span className="text-secondary">Team</span>
+              Meet <span className="text-secondary">Dan</span>
             </h2>
             <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Our experienced team of diesel specialists brings decades of combined expertise to every project
+              The diesel mind behind every product on the shelf — handpicking what makes the cut.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 max-w-md mx-auto gap-8">
             {team.map((member, index) => (
               <motion.div
                 key={index}
@@ -210,10 +211,10 @@ export default function About() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Ready to Experience the Difference?
+              Ready to Build Something?
             </h2>
             <p className="text-xl text-white/90 mb-8">
-              Join hundreds of satisfied customers who trust Specialty Built for their diesel needs
+              Curated diesel performance parts and Specialty Built apparel — shipped fast, picked for builders.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a
