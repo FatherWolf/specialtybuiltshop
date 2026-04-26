@@ -29,17 +29,14 @@ export default function Header() {
             <Link href="/" className="text-white hover:text-teal-300 transition-colors">
               Home
             </Link>
-            <Link href="/shop" className="text-white hover:text-teal-300 transition-colors font-semibold">
-              Shop
-            </Link>
-            <Link href="/shop" className="text-white hover:text-teal-300 transition-colors">
+            <Link href="/shop?category=parts" className="text-white hover:text-teal-300 transition-colors font-semibold">
               Parts
             </Link>
-            <Link href="/shop" className="text-white hover:text-teal-300 transition-colors">
+            <Link href="/shop?category=apparel" className="text-white hover:text-teal-300 transition-colors font-semibold">
               Apparel
             </Link>
-            <Link href="/services" className="text-white hover:text-teal-300 transition-colors">
-              Services
+            <Link href="/about" className="text-white hover:text-teal-300 transition-colors">
+              About
             </Link>
             <Link href="/contact" className="text-white hover:text-teal-300 transition-colors">
               Contact
@@ -48,7 +45,7 @@ export default function Header() {
 
           <div className="hidden md:flex items-center space-x-4">
             <CartIcon onClick={() => setIsCartOpen(!isCartOpen)} />
-            <Link href="/shop" className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium text-sm transition-colors">
+            <Link href="/shop?category=parts" className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium text-sm transition-colors">
               Shop Now
             </Link>
             <a href="tel:+19802414823" className="flex items-center space-x-2 text-teal-300 hover:text-white transition-colors">
@@ -79,18 +76,18 @@ export default function Header() {
                 Home
               </Link>
               <Link
-                href="/shop"
+                href="/shop?category=parts"
                 className="text-white hover:text-teal-300 transition-colors py-3 px-4 rounded-lg hover:bg-white/10 font-semibold"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Shop
+                Parts
               </Link>
               <Link
-                href="/services"
-                className="text-white hover:text-teal-300 transition-colors py-3 px-4 rounded-lg hover:bg-white/10"
+                href="/shop?category=apparel"
+                className="text-white hover:text-teal-300 transition-colors py-3 px-4 rounded-lg hover:bg-white/10 font-semibold"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Services
+                Apparel
               </Link>
               <Link
                 href="/about"
@@ -108,7 +105,7 @@ export default function Header() {
               </Link>
               <div className="pt-4 mt-4 border-t border-purple-500/30">
                 <Link
-                  href="/shop"
+                  href="/shop?category=parts"
                   className="block bg-teal-600 hover:bg-teal-700 text-white px-4 py-3 rounded-lg font-medium text-center transition-colors mb-4"
                   onClick={() => setIsMenuOpen(false)}
                 >

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Phone, Mail, MapPin, Clock, Send, Loader2 } from 'lucide-react'
+import { Phone, Mail, Clock, Send, Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -13,9 +13,9 @@ const contactSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
   lastName: z.string().min(1, 'Last name is required'),
   email: z.string().email('Please enter a valid email address'),
-  phone: z.string().min(1, 'Phone number is required'),
-  vehicleInfo: z.string().optional(),
-  serviceNeeded: z.string().optional(),
+  phone: z.string().optional(),
+  topic: z.string().optional(),
+  orderNumber: z.string().optional(),
   message: z.string().min(1, 'Please enter a message'),
 })
 
@@ -76,7 +76,7 @@ export default function Contact() {
       setModal({
         isOpen: true,
         type: 'error',
-        message: 'Failed to send message. Please try again or contact Dan directly.'
+        message: 'Failed to send message. Please try again or email us directly at dan@specialtybuilt.com.'
       })
     } finally {
       setIsSubmitting(false)
@@ -104,7 +104,7 @@ export default function Contact() {
               Get In <span className="text-primary">Touch</span>
             </h1>
             <p className="text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto">
-              Ready to boost your diesel&apos;s performance? Contact Dan for expert service and custom solutions.
+              Questions about a product, an order, or sizing? Send us a message and we&apos;ll get back to you.
             </p>
           </motion.div>
         </div>
@@ -126,35 +126,24 @@ export default function Contact() {
               
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <div className="bg-primary/10 p-3 rounded-lg">
-                    <Phone className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-1">Phone</h3>
-                    <p className="text-foreground/70">(980) 241-4823</p>
-                    <p className="text-sm text-foreground/60">Call or text anytime - Dan responds evenings</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
                   <div className="bg-secondary/10 p-3 rounded-lg">
                     <Mail className="w-6 h-6 text-secondary" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground mb-1">Email</h3>
                     <p className="text-foreground/70">dan@specialtybuilt.com</p>
-                    <p className="text-sm text-foreground/60">Dan responds to emails personally</p>
+                    <p className="text-sm text-foreground/60">For order questions, sizing, or general support</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4">
                   <div className="bg-primary/10 p-3 rounded-lg">
-                    <MapPin className="w-6 h-6 text-primary" />
+                    <Phone className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground mb-1">Location</h3>
-                    <p className="text-foreground/70">Shop Location<br />Contact for address</p>
-                    <p className="text-sm text-foreground/60">Working with FABMD partnership</p>
+                    <h3 className="font-semibold text-foreground mb-1">Phone</h3>
+                    <p className="text-foreground/70">(980) 241-4823</p>
+                    <p className="text-sm text-foreground/60">Call or text — usually a reply within 24 hours</p>
                   </div>
                 </div>
 
@@ -163,26 +152,24 @@ export default function Contact() {
                     <Clock className="w-6 h-6 text-secondary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground mb-1">Hours</h3>
+                    <h3 className="font-semibold text-foreground mb-1">Response Time</h3>
                     <div className="text-foreground/70 space-y-1">
-                      <p>Flexible scheduling available</p>
-                      <p>Call or text to arrange appointment</p>
-                      <p>Evening responses typical</p>
+                      <p>Most messages get a reply within 24 hours</p>
+                      <p>Order status questions: include your order number for the fastest answer</p>
                     </div>
-                    <p className="text-sm text-foreground/60">Accommodating schedule for diesel needs</p>
                   </div>
                 </div>
               </div>
 
-              {/* Emergency Contact */}
+              {/* Order Help Block */}
               <div className="mt-8 p-6 bg-accent rounded-lg border border-primary/20">
                 <h3 className="font-semibold text-foreground mb-2 flex items-center">
-                  <Phone className="w-5 h-5 text-primary mr-2" />
-                  Direct Contact
+                  <Mail className="w-5 h-5 text-primary mr-2" />
+                  Order Help
                 </h3>
-                <p className="text-foreground/70 mb-2">For questions, advice, or consultation:</p>
-                <p className="text-primary font-bold text-lg">(980) 241-4823</p>
-                <p className="text-sm text-foreground/60">Text or call anytime - Dan will get back to you</p>
+                <p className="text-foreground/70 mb-2">
+                  Tracking, returns, exchanges, sizing, or product questions — drop a note in the form and we&apos;ll sort it out.
+                </p>
               </div>
             </motion.div>
 
@@ -194,7 +181,7 @@ export default function Contact() {
             >
               <div className="bg-accent p-8 rounded-lg border border-muted">
                 <h2 className="text-3xl font-bold text-foreground mb-8">
-                  Send Dan a <span className="text-primary">Message</span>
+                  Send Us a <span className="text-primary">Message</span>
                 </h2>
                 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -246,7 +233,7 @@ export default function Contact() {
 
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
-                      Phone *
+                      Phone <span className="text-foreground/40">(optional)</span>
                     </label>
                     <input
                       {...register('phone')}
@@ -254,40 +241,36 @@ export default function Contact() {
                       className="w-full px-4 py-3 bg-background border border-muted rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
                       placeholder="(980) 123-4567"
                     />
-                    {errors.phone && (
-                      <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>
-                    )}
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-2">
-                      Vehicle Information
+                      Topic
                     </label>
-                    <input
-                      {...register('vehicleInfo')}
-                      type="text"
-                      className="w-full px-4 py-3 bg-background border border-muted rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
-                      placeholder="Year, Make, Model (e.g., 2015 Ford F-350)"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Service Needed
-                    </label>
-                    <select 
-                      {...register('serviceNeeded')}
+                    <select
+                      {...register('topic')}
                       className="w-full px-4 py-3 bg-background border border-muted rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
                     >
-                      <option value="">Select a service</option>
-                      <option value="duramax">Duramax Specialist Services</option>
-                      <option value="powerstroke">6.0 Powerstroke Bulletproofing</option>
-                      <option value="cummins">Cummins Maintenance</option>
-                      <option value="fabrication">Custom Fabrication (FABMD)</option>
-                      <option value="gas">Gas Vehicle Service</option>
-                      <option value="consultation">Consultation/Advice</option>
-                      <option value="other">Other</option>
+                      <option value="">What can we help with?</option>
+                      <option value="order-status">Order status / tracking</option>
+                      <option value="return-exchange">Return or exchange</option>
+                      <option value="product-question">Product question</option>
+                      <option value="sizing">Sizing question</option>
+                      <option value="shipping">Shipping question</option>
+                      <option value="other">Something else</option>
                     </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-2">
+                      Order Number <span className="text-foreground/40">(optional, helps us help you faster)</span>
+                    </label>
+                    <input
+                      {...register('orderNumber')}
+                      type="text"
+                      className="w-full px-4 py-3 bg-background border border-muted rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
+                      placeholder="#1024"
+                    />
                   </div>
 
                   <div>
@@ -298,7 +281,7 @@ export default function Contact() {
                       {...register('message')}
                       rows={4}
                       className="w-full px-4 py-3 bg-background border border-muted rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-foreground resize-none"
-                      placeholder="Tell Dan about your diesel's needs or any specific concerns..."
+                      placeholder="How can we help?"
                     ></textarea>
                     {errors.message && (
                       <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>
@@ -320,7 +303,7 @@ export default function Contact() {
                     ) : (
                       <>
                         <Send className="w-5 h-5" />
-                        <span>Send Message to Dan</span>
+                        <span>Send Message</span>
                       </>
                     )}
                   </motion.button>
@@ -331,9 +314,9 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Map Section */}
+      {/* FAQ Quick Links */}
       <section className="py-24 bg-accent">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -341,20 +324,37 @@ export default function Contact() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
-              Visit Our <span className="text-secondary">Shop</span>
+              Common <span className="text-secondary">Questions</span>
             </h2>
             <p className="text-lg text-foreground/70">
-              Working with FABMD partnership for comprehensive diesel and fabrication services
+              Quick answers to the most common things customers ask.
             </p>
           </motion.div>
-          
-          <div className="bg-background rounded-lg p-2 shadow-lg">
-            <div className="w-full h-96 bg-muted rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="w-16 h-16 text-primary mx-auto mb-4" />
-                <p className="text-foreground/60">Contact Dan for shop location details</p>
-                <p className="text-sm text-foreground/40 mt-2">Call or text: (980) 241-4823</p>
-              </div>
+
+          <div className="space-y-4">
+            <div className="bg-background p-6 rounded-lg border border-muted">
+              <h3 className="font-semibold text-foreground mb-2">When will my order ship?</h3>
+              <p className="text-foreground/70">
+                Orders typically ship within 1–2 business days. You&apos;ll receive a tracking email as soon as it&apos;s on its way.
+              </p>
+            </div>
+            <div className="bg-background p-6 rounded-lg border border-muted">
+              <h3 className="font-semibold text-foreground mb-2">What&apos;s the return policy?</h3>
+              <p className="text-foreground/70">
+                Apparel can be returned within 30 days if unworn. Performance parts: 30-day return window if unused and in original packaging. Send us a message with your order number and we&apos;ll start the return.
+              </p>
+            </div>
+            <div className="bg-background p-6 rounded-lg border border-muted">
+              <h3 className="font-semibold text-foreground mb-2">Do you fit X part on Y truck?</h3>
+              <p className="text-foreground/70">
+                Each product page lists supported platforms (Duramax / Cummins / Powerstroke / generations). If you&apos;re not sure, send us a message with your year/make/model and we&apos;ll confirm fitment before you order.
+              </p>
+            </div>
+            <div className="bg-background p-6 rounded-lg border border-muted">
+              <h3 className="font-semibold text-foreground mb-2">Do you do installations?</h3>
+              <p className="text-foreground/70">
+                We&apos;re an online parts and apparel shop — installation isn&apos;t something we offer. We can recommend a reputable shop near you if you ask.
+              </p>
             </div>
           </div>
         </div>

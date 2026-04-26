@@ -285,20 +285,20 @@ export default function About() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a
-                href="/contact"
+                href="/shop?category=parts"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors"
               >
-                Get Started Today
+                Shop Parts
               </motion.a>
               <motion.a
-                href="/services"
+                href="/shop?category=apparel"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-colors"
               >
-                View Our Services
+                Shop Apparel
               </motion.a>
             </div>
           </motion.div>

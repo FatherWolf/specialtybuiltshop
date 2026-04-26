@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 export async function POST(request) {
   try {
     const body = await request.json()
-    const { firstName, lastName, email, phone, vehicleInfo, serviceNeeded, message } = body
+    const { firstName, lastName, email, phone, topic, orderNumber, message } = body
 
     // Create transporter using Gmail
     const transporter = nodemailer.createTransport({
@@ -20,14 +20,14 @@ export async function POST(request) {
       from: process.env.GMAIL_USER,
       to: process.env.GMAIL_USER, // Send to Dan
       replyTo: email, // Reply to customer
-      subject: `New Contact Form Submission from ${firstName} ${lastName}`,
+      subject: `New Contact Form Submission from ${firstName} ${lastName}${topic ? ` — ${topic}` : ''}`,
       html: `
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${firstName} ${lastName}</p>
         <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        ${vehicleInfo ? `<p><strong>Vehicle:</strong> ${vehicleInfo}</p>` : ''}
-        ${serviceNeeded ? `<p><strong>Service Needed:</strong> ${serviceNeeded}</p>` : ''}
+        ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ''}
+        ${topic ? `<p><strong>Topic:</strong> ${topic}</p>` : ''}
+        ${orderNumber ? `<p><strong>Order #:</strong> ${orderNumber}</p>` : ''}
         <p><strong>Message:</strong></p>
         <p>${message}</p>
       `,

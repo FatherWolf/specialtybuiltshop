@@ -98,22 +98,22 @@ export default function Home() {
               <span className="text-sm sm:text-base md:text-lg text-teal-300 block sm:inline mt-2 sm:mt-0">Duramax • Powerstroke • Cummins • Merch & Apparel</span>
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <Link href="/shop" className="w-full sm:w-auto">
+              <Link href="/shop?category=parts" className="w-full sm:w-auto">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-gradient-to-r from-purple-500 to-teal-600 hover:from-purple-600 hover:to-teal-700 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg transition-all duration-300 shadow-xl w-full"
                 >
-                  Shop Parts & Gear
+                  Shop Parts
                 </motion.button>
               </Link>
-              <Link href="/shop" className="w-full sm:w-auto">
+              <Link href="/shop?category=apparel" className="w-full sm:w-auto">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="border-2 border-white/50 hover:border-white bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg transition-all duration-300 w-full"
                 >
-                  View Best Sellers
+                  Shop Apparel
                 </motion.button>
               </Link>
             </div>
@@ -138,24 +138,27 @@ export default function Home() {
                 description: "Turbos, injectors, cold-air intakes, and upgrade kits for Duramax, Cummins, and Powerstroke platforms.",
                 icon: "⚡",
                 image: "/images/parts-engines/IMG_2948.jpg",
-                cta: "Shop Parts"
+                cta: "Shop Parts",
+                href: "/shop?category=parts"
               },
               {
                 title: "Engine Components",
                 description: "Head studs, gaskets, oil coolers, fuel system components, and everything you need for a bulletproof build.",
                 icon: "🔧",
                 image: "/images/parts-engines/IMG_1762.jpg",
-                cta: "Browse Components"
+                cta: "Browse Components",
+                href: "/shop?category=parts"
               },
               {
                 title: "Apparel & Merch",
                 description: "Premium Specialty Built hats, tees, hoodies, and caps. Rep the brand that builds the horsepower.",
                 icon: "🧢",
                 image: "/images/trucks/IMG_0740.JPG.jpeg",
-                cta: "Shop Merch"
+                cta: "Shop Apparel",
+                href: "/shop?category=apparel"
               }
             ].map((category, index) => (
-              <Link key={index} href="/shop" className="block">
+              <Link key={index} href={category.href} className="block">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -216,7 +219,7 @@ export default function Home() {
                 description: "Intercooler piping, brackets & bespoke parts"
               }
             ].map((work, index) => (
-              <Link key={index} href="/shop" className="block">
+              <Link key={index} href="/shop?category=parts" className="block">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
@@ -245,14 +248,23 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="text-center">
-            <Link href="/shop">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
+            <Link href="/shop?category=parts">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-gradient-to-r from-purple-500 to-teal-600 hover:from-purple-600 hover:to-teal-700 text-white font-semibold py-3 sm:py-4 px-8 sm:px-10 rounded-full text-base sm:text-lg transition-all duration-300 shadow-xl"
               >
-                Shop All Products
+                Shop Parts
+              </motion.button>
+            </Link>
+            <Link href="/shop?category=apparel">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="border-2 border-purple-400 hover:border-teal-300 text-white font-semibold py-3 sm:py-4 px-8 sm:px-10 rounded-full text-base sm:text-lg transition-all duration-300"
+              >
+                Shop Apparel
               </motion.button>
             </Link>
           </div>
@@ -324,13 +336,22 @@ export default function Home() {
               Premium performance parts, upgrade kits, and Specialty Built apparel — everything ships fast and is built to last.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
-              <Link href="/shop">
+              <Link href="/shop?category=parts">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-white text-purple-600 hover:bg-gray-100 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg transition-all duration-300 shadow-xl"
                 >
-                  Shop All Products
+                  Shop Parts
+                </motion.button>
+              </Link>
+              <Link href="/shop?category=apparel">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-white text-teal-600 hover:bg-gray-100 font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg transition-all duration-300 shadow-xl"
+                >
+                  Shop Apparel
                 </motion.button>
               </Link>
               <Link href="/contact">

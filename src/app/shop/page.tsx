@@ -1,15 +1,33 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { ShoppingCart, Filter } from 'lucide-react'
 import Header from '../../components/Header'
 import ProductModal from '../../components/ProductModal'
 
+// Map of permitted ?category= values (and a few aliases) to the internal filter key
+const CATEGORY_ALIASES: Record<string, string> = {
+  parts: 'parts',
+  apparel: 'merchandise',
+  merchandise: 'merchandise',
+  merch: 'merchandise',
+  'best-sellers': 'best-sellers',
+  bestsellers: 'best-sellers',
+  featured: 'best-sellers',
+}
+
 export default function Shop() {
+  const searchParams = useSearchParams()
+  const initialFilter = (() => {
+    const c = searchParams.get('category')?.toLowerCase()
+    return (c && CATEGORY_ALIASES[c]) || 'parts'
+  })()
+
   const [products, setProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
-  const [filter, setFilter] = useState('all')
+  const [filter, setFilter] = useState(initialFilter)
   const [mounted, setMounted] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState<any>(null)
   const [modalOpen, setModalOpen] = useState(false)
@@ -17,6 +35,13 @@ export default function Shop() {
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  // Keep filter in sync if the user navigates with a different ?category=
+  useEffect(() => {
+    const c = searchParams.get('category')?.toLowerCase()
+    const mapped = (c && CATEGORY_ALIASES[c]) || 'parts'
+    setFilter(mapped)
+  }, [searchParams])
 
   useEffect(() => {
     if (!mounted) return
@@ -172,7 +197,7 @@ export default function Shop() {
 
   const displayProducts = shopifyProductsFormatted.length > 0 ? shopifyProductsFormatted : mockProducts
 
-  const categories = ['all', 'parts', 'merchandise', 'best-sellers']
+  const categories = ['parts', 'merchandise', 'best-sellers']
 
   // Filter by Shopify tag or product type. Set tags in Shopify admin:
   //   parts         → performance parts, engine components, anything mechanical
@@ -204,9 +229,7 @@ export default function Shop() {
     return true
   }
 
-  const filteredProducts = filter === 'all'
-    ? displayProducts
-    : displayProducts.filter(product => matchesCategory(product, filter))
+  const filteredProducts = displayProducts.filter(product => matchesCategory(product, filter))
 
   const openProductModal = (product: any) => {
     setSelectedProduct(product)
@@ -232,10 +255,18 @@ export default function Shop() {
             className="text-center"
           >
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-              Performance <span className="text-primary">Shop</span>
+              {filter === 'merchandise'
+                ? <>Specialty Built <span className="text-primary">Apparel</span></>
+                : filter === 'best-sellers'
+                  ? <>Best <span className="text-primary">Sellers</span></>
+                  : <>Performance <span className="text-primary">Parts</span></>}
             </h1>
             <p className="text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto">
-              Premium diesel performance parts and Specialty Built merchandise
+              {filter === 'merchandise'
+                ? 'Premium hats, tees, hoodies, and gear — rep the brand that builds the horsepower.'
+                : filter === 'best-sellers'
+                  ? 'Our top-selling parts and apparel — the gear customers keep coming back for.'
+                  : 'Performance parts and upgrade kits for Duramax, Cummins, and Powerstroke platforms.'}
             </p>
           </motion.div>
         </div>
@@ -260,7 +291,9 @@ export default function Shop() {
                   >
                     {category === 'best-sellers'
                       ? 'Best Sellers'
-                      : category.charAt(0).toUpperCase() + category.slice(1)}
+                      : category === 'merchandise'
+                        ? 'Apparel'
+                        : category.charAt(0).toUpperCase() + category.slice(1)}
                   </button>
                 ))}
               </div>
