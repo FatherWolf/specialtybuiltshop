@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X, Phone, Trophy } from 'lucide-react'
@@ -12,6 +12,15 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
   const giveawayLive = isGiveawayLive(giveaway)
+
+  // Allow other components (e.g. <CartToast />) to open the cart modal
+  // by dispatching a window-level event. Avoids lifting cart-open state
+  // into a context just for one cross-component nudge.
+  useEffect(() => {
+    const handler = () => setIsCartOpen(true)
+    window.addEventListener('open-cart', handler)
+    return () => window.removeEventListener('open-cart', handler)
+  }, [])
 
   return (
     <header className="bg-gradient-to-r from-purple-900/95 to-teal-900/95 backdrop-blur-sm border-b border-purple-700 sticky top-0 z-50">

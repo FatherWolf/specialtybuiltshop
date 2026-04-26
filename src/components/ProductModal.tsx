@@ -84,7 +84,9 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
         image: displayProduct.images?.[0]?.src || displayProduct.images?.[0]
       });
 
-      alert(`Added ${quantity}x ${displayProduct.title} to cart!`);
+      // Confirmation feedback is handled by <CartToast /> (mounted in the
+      // root layout), which auto-renders when CartContext.notification is
+      // set by addItem above.
       onClose();
     } catch (error) {
       console.error('Error adding to cart:', error);

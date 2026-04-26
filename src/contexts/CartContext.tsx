@@ -11,6 +11,15 @@ interface CartItem {
   image?: string
 }
 
+/** Lightweight notification surfaced by <CartToast />. Set by addItem. */
+export interface CartNotification {
+  id: number
+  title: string
+  quantity: number
+  image?: string
+  price: string
+}
+
 interface CartContextType {
   items: CartItem[]
   addItem: (item: CartItem) => void
@@ -19,12 +28,17 @@ interface CartContextType {
   clearCart: () => void
   totalItems: number
   totalPrice: number
+  /** Most recent "added to cart" notification, or null. CartToast watches this. */
+  notification: CartNotification | null
+  /** Imperatively dismiss the current notification (e.g. from CartToast on click). */
+  dismissNotification: () => void
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
+  const [notification, setNotification] = useState<CartNotification | null>(null)
 
   // Load cart from localStorage on mount
   useEffect(() => {
@@ -51,7 +65,20 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       }
       return [...prevItems, newItem]
     })
+
+    // Surface a toast. The id is just a monotonically-changing key so
+    // CartToast can re-trigger its enter animation if the same product
+    // is added twice in a row.
+    setNotification({
+      id: Date.now(),
+      title: newItem.title,
+      quantity: newItem.quantity,
+      image: newItem.image,
+      price: newItem.price,
+    })
   }
+
+  const dismissNotification = () => setNotification(null)
 
   const removeItem = (id: string) => {
     setItems(prevItems => prevItems.filter(item => item.id !== id))
@@ -84,7 +111,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       updateQuantity,
       clearCart,
       totalItems,
-      totalPrice
+      totalPrice,
+      notification,
+      dismissNotification,
     }}>
       {children}
     </CartContext.Provider>
