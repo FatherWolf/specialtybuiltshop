@@ -8,6 +8,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ProductModal from '../components/ProductModal';
 import GiveawayBanner from '../components/GiveawayBanner';
+import { formatPrice } from '../lib/format';
 
 const fallbackProducts = [
   {
@@ -311,7 +312,7 @@ export default function Home() {
                   <p className="text-gray-300 mb-4 line-clamp-2">{product.body_html?.replace(/<[^>]*>/g, '') || product.description}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-teal-400">
-                      ${product.variants?.[0]?.price || '29.99'}
+                      ${formatPrice(product.variants?.[0]?.price ?? '29.99')}
                     </span>
                     <button className="flex items-center text-purple-400 hover:text-purple-300 font-medium">
                       View Details

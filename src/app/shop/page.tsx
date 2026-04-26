@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { ShoppingCart, Filter } from 'lucide-react'
 import Header from '../../components/Header'
 import ProductModal from '../../components/ProductModal'
+import { formatPrice } from '../../lib/format'
 
 // Map of permitted ?category= values (and a few aliases) to the internal filter key
 const CATEGORY_ALIASES: Record<string, string> = {
@@ -352,7 +353,7 @@ export default function Shop() {
                     </p>
                     <div className="flex items-center justify-between">
                       <span className="text-xl font-bold text-primary">
-                        ${product.priceRange.minVariantPrice.amount}
+                        ${formatPrice(product.priceRange.minVariantPrice.amount)}
                       </span>
                       <motion.button
                         whileHover={{ scale: 1.05 }}

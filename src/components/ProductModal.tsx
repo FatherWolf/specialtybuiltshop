@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ShoppingCart, Plus, Minus, Check } from 'lucide-react'
 import { useCart } from '@/contexts/CartContext'
+import { formatPrice } from '@/lib/format'
 
 interface ProductModalProps {
   product: any
@@ -171,7 +172,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                   <div className="space-y-6">
                     <div>
                       <div className="text-3xl font-bold text-teal-400 mb-2">
-                        ${selectedVariant?.price || displayProduct.price || '29.99'}
+                        ${formatPrice(selectedVariant?.price ?? displayProduct.price ?? '29.99')}
                       </div>
                       <div className="text-sm text-gray-400">
                         <span className="text-green-400 flex items-center">
