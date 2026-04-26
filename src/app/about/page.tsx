@@ -18,12 +18,6 @@ export default function About() {
       role: "Owner & Diesel Specialist",
       experience: "4+ years in diesel performance",
       specialties: ["Duramax Expert", "6.0 Powerstroke Bulletproofing", "Cummins Maintenance"]
-    },
-    {
-      name: "FABMD Partnership",
-      role: "Custom Fabrication Partner",
-      experience: "Specialized metal fabrication",
-      specialties: ["Steel Work", "Intercooler Piping", "Custom Metal Projects"]
     }
   ]
 
@@ -96,9 +90,9 @@ export default function About() {
                   Dan believes in honest service - if he&apos;s not confident in a repair, he&apos;ll refer you to the right specialist.
                 </p>
                 <p>
-                  Through partnerships like FABMD for custom fabrication work, Specialty Built offers comprehensive 
-                  diesel services. Dan also works on gas vehicles when the diesel knowledge applies, always eager to learn 
-                  and help where possible.
+                  Today Specialty Built focuses on bringing that same hands-on diesel expertise to a curated lineup
+                  of performance parts, upgrade kits, and branded apparel — gear chosen because it&apos;s what Dan would
+                  install on his own truck.
                 </p>
               </div>
             </motion.div>

@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Specialty Built Performance and Fab - Diesel Parts & Custom Fabrication",
-  description: "Premium diesel performance parts for Duramax, Cummins, and Powerstroke engines. Custom fabrication services with FABMD partnership. Shop diesel parts online.",
-  keywords: "diesel parts, performance parts, Duramax parts, Cummins parts, Powerstroke parts, custom fabrication, diesel performance, turbo, injectors",
+  title: "Specialty Built Performance and Fab - Diesel Parts & Apparel",
+  description: "Premium diesel performance parts and apparel for Duramax, Cummins, and Powerstroke platforms. Shop performance parts, upgrade kits, and Specialty Built gear online.",
+  keywords: "diesel parts, performance parts, Duramax parts, Cummins parts, Powerstroke parts, diesel performance, turbo, injectors, diesel apparel",
   authors: [{ name: "Dan - Specialty Built Performance and Fab" }],
   icons: {
     icon: [
@@ -28,8 +28,8 @@ export const metadata: Metadata = {
     apple: '/logo.png',
   },
   openGraph: {
-    title: "Specialty Built Performance and Fab - Diesel Parts & Custom Fabrication",
-    description: "Premium diesel performance parts for Duramax, Cummins, and Powerstroke engines. Custom fabrication services with FABMD partnership.",
+    title: "Specialty Built Performance and Fab - Diesel Parts & Apparel",
+    description: "Premium diesel performance parts and apparel for Duramax, Cummins, and Powerstroke platforms.",
     type: "website",
     locale: "en_US",
     url: "https://specialtybuiltshop.com",
@@ -46,8 +46,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Specialty Built Performance and Fab - Diesel Parts & Custom Fabrication",
-    description: "Premium diesel performance parts for Duramax, Cummins, and Powerstroke engines. Custom fabrication services with FABMD partnership.",
+    title: "Specialty Built Performance and Fab - Diesel Parts & Apparel",
+    description: "Premium diesel performance parts and apparel for Duramax, Cummins, and Powerstroke platforms.",
     images: ['https://specialtybuiltshop.com/logo.png'],
   },
 };
