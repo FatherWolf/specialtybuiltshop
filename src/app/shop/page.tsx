@@ -346,13 +346,26 @@ function ShopContent() {
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProducts.map((product, index) => (
+              {filteredProducts.map((product, index) => {
+                // A product is fully sold out when every variant is unavailable.
+                // We still render the card (with a "Sold Out" overlay) so the
+                // customer can see what's coming back, instead of silently
+                // hiding it.
+                const variants = product.variants || []
+                const allSoldOut =
+                  variants.length > 0 &&
+                  variants.every(
+                    (v: any) => v?.available === false || v?.availableForSale === false
+                  )
+                return (
                 <motion.div
                   key={product.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-accent rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+                  className={`bg-accent rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer ${
+                    allSoldOut ? 'opacity-90' : ''
+                  }`}
                   onClick={() => openProductModal(product)}
                 >
                   <div className="aspect-square bg-muted relative">
@@ -360,11 +373,16 @@ function ShopContent() {
                       <img
                         src={product.images[0].src}
                         alt={product.images[0].alt || product.title}
-                        className="w-full h-full object-cover"
+                        className={`w-full h-full object-cover ${allSoldOut ? 'grayscale' : ''}`}
                       />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
                         <ShoppingCart className="w-16 h-16 text-muted" />
+                      </div>
+                    )}
+                    {allSoldOut && (
+                      <div className="absolute top-3 left-3 bg-red-600/90 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded">
+                        Sold Out
                       </div>
                     )}
                   </div>
@@ -394,7 +412,8 @@ function ShopContent() {
                     </div>
                   </div>
                 </motion.div>
-              ))}
+                )
+              })}
             </div>
           )}
         </div>

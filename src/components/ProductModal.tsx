@@ -12,6 +12,22 @@ interface ProductModalProps {
   onClose: () => void
 }
 
+/**
+ * Treat a variant as available unless Shopify explicitly says it's not.
+ * Different code paths normalize the field differently:
+ *   - Storefront API (our default) → variant.available (boolean)
+ *   - Mock fallback data            → variant.available (boolean)
+ *   - Older shopify-buy SDK shape   → variant.availableForSale (boolean)
+ * Anything missing/undefined defaults to available so we don't accidentally
+ * mark legitimately-stocked items as sold out.
+ */
+function isVariantAvailable(variant: any): boolean {
+  if (!variant) return false
+  if (variant.available === false) return false
+  if (variant.availableForSale === false) return false
+  return true
+}
+
 export default function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
   const [selectedVariant, setSelectedVariant] = useState<any>(null)
   const [selectedImage, setSelectedImage] = useState(0)
@@ -28,12 +44,17 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
 
   const fetchProductDetails = async () => {
     if (!product?.id) return
-    
+
     setLoading(true)
     // Use static product data for clean display
     setProductDetails(product)
     if (product.variants && product.variants.length > 0) {
-      setSelectedVariant(product.variants[0])
+      // Pre-select the first IN-STOCK variant. Falling back to the first
+      // variant overall keeps the price/details visible even when every
+      // option is sold out (the Add to Cart button still gets disabled).
+      const isAvailable = (v: any) => v?.available !== false && v?.availableForSale !== false
+      const firstInStock = product.variants.find(isAvailable)
+      setSelectedVariant(firstInStock ?? product.variants[0])
     }
     setLoading(false)
   }
@@ -73,6 +94,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
 
   const handleAddToCart = () => {
     if (!selectedVariant) return;
+    if (!isVariantAvailable(selectedVariant)) return;
 
     try {
       addItem({
@@ -176,11 +198,17 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                       <div className="text-3xl font-bold text-teal-400 mb-2">
                         ${formatPrice(selectedVariant?.price ?? displayProduct.price ?? '29.99')}
                       </div>
-                      <div className="text-sm text-gray-400">
-                        <span className="text-green-400 flex items-center">
-                          <Check className="w-4 h-4 mr-1" />
-                          Available on Shopify
-                        </span>
+                      <div className="text-sm">
+                        {isVariantAvailable(selectedVariant) ? (
+                          <span className="text-green-400 flex items-center">
+                            <Check className="w-4 h-4 mr-1" />
+                            In Stock
+                          </span>
+                        ) : (
+                          <span className="text-red-400 flex items-center font-medium">
+                            Out of Stock
+                          </span>
+                        )}
                       </div>
                     </div>
 
@@ -201,30 +229,44 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                       )}
                     </div>
 
-                    {/* Color Options */}
+                    {/* Variant Options */}
                     {variants.length > 0 && (
                       <div>
-                        <h4 className="font-semibold mb-3 text-white">Color Options:</h4>
+                        <h4 className="font-semibold mb-3 text-white">Options:</h4>
                         <div className="flex flex-wrap gap-3">
-                          {variants.map((variant: any) => (
-                            <button
-                              key={variant.id}
-                              onClick={() => setSelectedVariant(variant)}
-                              className={`flex items-center space-x-2 px-4 py-2 border-2 rounded-lg font-medium transition-all ${
-                                selectedVariant?.id === variant.id
-                                  ? 'border-purple-500 bg-purple-900/50 text-white'
-                                  : 'border-gray-600 hover:border-purple-400 text-gray-300 hover:text-white'
-                              }`}
-                            >
-                              {variant.color && (
-                                <div 
-                                  className="w-4 h-4 rounded-full border border-slate-300"
-                                  style={{ backgroundColor: variant.color }}
-                                />
-                              )}
-                              <span>{variant.title}</span>
-                            </button>
-                          ))}
+                          {variants.map((variant: any) => {
+                            const available = isVariantAvailable(variant)
+                            const selected = selectedVariant?.id === variant.id
+                            return (
+                              <button
+                                key={variant.id}
+                                onClick={() => available && setSelectedVariant(variant)}
+                                disabled={!available}
+                                aria-disabled={!available}
+                                title={available ? variant.title : `${variant.title} — out of stock`}
+                                className={`flex items-center space-x-2 px-4 py-2 border-2 rounded-lg font-medium transition-all ${
+                                  !available
+                                    ? 'border-gray-700 bg-gray-900/40 text-gray-500 line-through cursor-not-allowed'
+                                    : selected
+                                      ? 'border-purple-500 bg-purple-900/50 text-white'
+                                      : 'border-gray-600 hover:border-purple-400 text-gray-300 hover:text-white'
+                                }`}
+                              >
+                                {variant.color && (
+                                  <div
+                                    className={`w-4 h-4 rounded-full border border-slate-300 ${!available ? 'opacity-40' : ''}`}
+                                    style={{ backgroundColor: variant.color }}
+                                  />
+                                )}
+                                <span>{variant.title}</span>
+                                {!available && (
+                                  <span className="text-[10px] uppercase tracking-wide text-red-400 ml-1 no-underline font-semibold">
+                                    Sold out
+                                  </span>
+                                )}
+                              </button>
+                            )
+                          })}
                         </div>
                       </div>
                     )}
@@ -251,16 +293,21 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                     </div>
 
                     {/* Add to Cart Button */}
-                    <motion.button
-                      onClick={handleAddToCart}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      disabled={!selectedVariant}
-                      className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 disabled:bg-slate-400 disabled:cursor-not-allowed text-white px-6 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg"
-                    >
-                      <ShoppingCart className="w-5 h-5" />
-                      <span>Add to Cart</span>
-                    </motion.button>
+                    {(() => {
+                      const canAdd = selectedVariant && isVariantAvailable(selectedVariant)
+                      return (
+                        <motion.button
+                          onClick={handleAddToCart}
+                          whileHover={canAdd ? { scale: 1.02 } : {}}
+                          whileTap={canAdd ? { scale: 0.98 } : {}}
+                          disabled={!canAdd}
+                          className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 disabled:from-gray-700 disabled:to-gray-700 disabled:text-gray-400 disabled:cursor-not-allowed text-white px-6 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg"
+                        >
+                          <ShoppingCart className="w-5 h-5" />
+                          <span>{canAdd ? 'Add to Cart' : 'Out of Stock'}</span>
+                        </motion.button>
+                      )
+                    })()}
                     
                     <div className="text-center text-sm text-gray-400">
                       Secure checkout powered by Shopify
