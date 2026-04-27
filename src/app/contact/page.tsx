@@ -341,7 +341,7 @@ export default function Contact() {
             <div className="bg-background p-6 rounded-lg border border-muted">
               <h3 className="font-semibold text-foreground mb-2">What&apos;s the return policy?</h3>
               <p className="text-foreground/70">
-                Apparel can be returned within 30 days if unworn. Performance parts: 30-day return window if unused and in original packaging. Send us a message with your order number and we&apos;ll start the return.
+                Reach out to Dan directly — by email at <a href="mailto:dan@specialtybuilt.com" className="text-primary hover:underline">dan@specialtybuilt.com</a>, by phone at <a href="tel:+19802414823" className="text-primary hover:underline">(980) 241-4823</a>, or through the contact form above. Include your order number and he&apos;ll get you sorted.
               </p>
             </div>
             <div className="bg-background p-6 rounded-lg border border-muted">
@@ -353,7 +353,7 @@ export default function Contact() {
             <div className="bg-background p-6 rounded-lg border border-muted">
               <h3 className="font-semibold text-foreground mb-2">Do you do installations?</h3>
               <p className="text-foreground/70">
-                We&apos;re an online parts and apparel shop — installation isn&apos;t something we offer. We can recommend a reputable shop near you if you ask.
+                We&apos;re primarily an online parts and apparel shop, but Dan can do installs if needed — give him a call at <a href="tel:+19802414823" className="text-primary hover:underline">(980) 241-4823</a> or email <a href="mailto:dan@specialtybuilt.com" className="text-primary hover:underline">dan@specialtybuilt.com</a> to talk it through.
               </p>
             </div>
           </div>
