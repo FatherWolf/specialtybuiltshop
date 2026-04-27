@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Menu, X, Phone, Trophy } from 'lucide-react'
+import { Menu, X, Trophy } from 'lucide-react'
 import CartIcon from './CartIcon'
 import CartModal from './CartModal'
 import { giveaway, isGiveawayLive } from '../lib/giveaway'
@@ -68,10 +68,6 @@ export default function Header() {
             <Link href="/shop?category=parts" className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg font-medium text-sm transition-colors">
               Shop Now
             </Link>
-            <a href="tel:+19802414823" className="flex items-center space-x-2 text-teal-300 hover:text-white transition-colors">
-              <Phone size={16} />
-              <span className="text-sm font-medium">(980) 241-4823</span>
-            </a>
           </div>
 
           <div className="md:hidden flex items-center space-x-3">
@@ -136,15 +132,11 @@ export default function Header() {
               <div className="pt-4 mt-4 border-t border-purple-500/30">
                 <Link
                   href="/shop?category=parts"
-                  className="block bg-teal-600 hover:bg-teal-700 text-white px-4 py-3 rounded-lg font-medium text-center transition-colors mb-4"
+                  className="block bg-teal-600 hover:bg-teal-700 text-white px-4 py-3 rounded-lg font-medium text-center transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Shop Now
                 </Link>
-                <a href="tel:+19802414823" className="flex items-center justify-center space-x-2 text-teal-300 hover:text-white transition-colors py-2">
-                  <Phone size={18} />
-                  <span className="font-medium">(980) 241-4823</span>
-                </a>
               </div>
             </nav>
           </div>

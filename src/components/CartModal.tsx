@@ -36,7 +36,14 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
       const data = await response.json().catch(() => ({}))
 
       if (response.ok && data.checkoutUrl) {
-        // Redirect to Shopify checkout with tax and shipping calculated
+        // Once Shopify hands us a valid checkout URL, the cart contents
+        // live on Shopify's side for the duration of that checkout session
+        // (60 min default). We clear our local copy so when the customer
+        // returns to the site after completing or abandoning the purchase
+        // they don't see a stale cart with items they may have already
+        // bought. Shopify's abandoned-cart recovery email handles the
+        // bounce-back case for us.
+        clearCart()
         window.location.href = data.checkoutUrl
         return
       }
