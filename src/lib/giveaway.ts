@@ -129,8 +129,8 @@ export const giveaway: Giveaway = {
     'responsibility of the winner. Sponsor will issue IRS Form 1099-MISC ' +
     'reporting the prize value if applicable.',
 
-  // PLACEHOLDER DATES — update before launch
-  startDate: '2026-05-01T00:00:00Z',
+  // Launch: 10 PM EDT on 2026-04-30 = 2026-05-01T02:00:00Z (UTC-4 during DST)
+  startDate: '2026-05-01T02:00:00Z',
   endDate: '2026-05-31T23:59:59Z',
 
   sponsor: {
