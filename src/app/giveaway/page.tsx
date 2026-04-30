@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Trophy, Mail, Instagram, Users, ShoppingBag, Calendar, ShieldCheck } from 'lucide-react'
@@ -15,6 +16,31 @@ import {
 export default function GiveawayPage() {
   const live = isGiveawayLive(giveaway)
   const ended = isGiveawayEnded(giveaway)
+  const widgetRef = useRef<HTMLDivElement>(null)
+  // Mount gate: the ViralSweep widget rewrites its own DOM after the script
+  // loads (it injects an iframe), which mismatches the SSR HTML and triggers
+  // a hydration error. Only render the embed on the client.
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // React's dangerouslySetInnerHTML inserts <script> tags as inert DOM nodes
+  // that never execute. Walk the rendered embed and re-create each <script>
+  // as a real DOM element so the widget loader can run.
+  useEffect(() => {
+    if (!mounted || !live || !widgetRef.current) return
+    const scripts = widgetRef.current.querySelectorAll('script')
+    scripts.forEach((orig) => {
+      const next = document.createElement('script')
+      Array.from(orig.attributes).forEach((attr) => {
+        next.setAttribute(attr.name, attr.value)
+      })
+      if (orig.textContent) next.textContent = orig.textContent
+      orig.replaceWith(next)
+    })
+  }, [mounted, live])
 
   return (
     <div className="min-h-screen bg-gray-900">
@@ -136,8 +162,18 @@ export default function GiveawayPage() {
                   // Widget HTML comes from a config file maintained by the site
                   // owner — never user input — so dangerouslySetInnerHTML is
                   // an acceptable injection point for the third-party embed.
+                  // Only filled in after mount; the loader's iframe injection
+                  // would otherwise cause a hydration mismatch on subsequent
+                  // navigations. The useEffect above re-instantiates any
+                  // <script> tags so the loader actually runs.
                   <div
-                    dangerouslySetInnerHTML={{ __html: giveaway.widgetEmbedHtml }}
+                    ref={widgetRef}
+                    suppressHydrationWarning
+                    dangerouslySetInnerHTML={
+                      mounted
+                        ? { __html: giveaway.widgetEmbedHtml }
+                        : { __html: '' }
+                    }
                   />
                 ) : (
                   <div className="text-center py-8">
@@ -150,6 +186,81 @@ export default function GiveawayPage() {
                     </p>
                   </div>
                 )}
+              </div>
+            </div>
+          </section>
+
+          {/* Shop & Earn — purchase bonus shown big; AMOE inline note keeps
+              equal-dignity disclosure clear and conspicuous without a
+              matched-size mail-in panel. */}
+          <section className="py-12 sm:py-16 bg-gray-900">
+            <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
+              <div className="bg-gradient-to-br from-teal-900/40 via-gray-800 to-purple-900/30 border border-teal-500/40 rounded-2xl p-6 sm:p-10 shadow-xl">
+                <div className="flex items-center justify-center mb-4">
+                  <ShoppingBag className="w-10 h-10 sm:w-12 sm:h-12 text-teal-400 mr-3" />
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+                    Shop &amp; Earn
+                  </h2>
+                </div>
+                <p className="text-center text-lg sm:text-xl text-gray-200 mb-8 max-w-2xl mx-auto leading-relaxed">
+                  Every <strong className="text-teal-300">$1</strong> spent at
+                  SpecialtyBuilt.com automatically earns you{' '}
+                  <strong className="text-teal-300">1 sweepstakes entry</strong>
+                  . The more you spend, the more entries you stack — calculated
+                  on the order subtotal (taxes and shipping don&rsquo;t count).
+                </p>
+
+                <div className="bg-gray-900/70 border border-gray-700 rounded-xl p-4 sm:p-6 max-w-md mx-auto mb-8">
+                  <div className="grid grid-cols-2 gap-3 text-base sm:text-lg">
+                    <div className="text-gray-300">$50 order</div>
+                    <div className="text-teal-300 font-bold text-right">
+                      50 entries
+                    </div>
+                    <div className="text-gray-300">$200 order</div>
+                    <div className="text-teal-300 font-bold text-right">
+                      200 entries
+                    </div>
+                    <div className="text-gray-300">$500 order</div>
+                    <div className="text-teal-300 font-bold text-right">
+                      500 entries
+                    </div>
+                    <div className="text-gray-300">$1,000 order</div>
+                    <div className="text-teal-300 font-bold text-right">
+                      1,000 entries
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-center text-sm text-gray-300 mb-6 max-w-xl mx-auto">
+                  Use the same email at checkout that you used to enter the
+                  sweepstakes — that&rsquo;s how your entries get credited
+                  automatically.
+                </p>
+
+                <div className="flex justify-center mb-6">
+                  <Link
+                    href="/shop?category=all"
+                    className="inline-flex items-center justify-center bg-gradient-to-r from-teal-500 to-purple-600 hover:from-teal-600 hover:to-purple-700 text-white font-bold py-4 px-10 text-lg rounded-full transition-all shadow-lg hover:shadow-teal-500/30"
+                  >
+                    Shop the Store
+                  </Link>
+                </div>
+
+                {/* Inline AMOE disclosure — clear and conspicuous, sits within
+                    the purchase-entry section so a reader sees the free
+                    alternative in the same eyeshot. */}
+                <p className="text-center text-xs sm:text-sm text-gray-400 border-t border-gray-700/60 pt-5 max-w-2xl mx-auto">
+                  <ShieldCheck className="w-4 h-4 inline-block mr-1 -mt-0.5 text-teal-400" />
+                  No purchase necessary. Every entry — including a free{' '}
+                  <Link
+                    href="/giveaway/mail-in"
+                    className="text-teal-300 hover:text-teal-200 underline"
+                  >
+                    mail-in entry
+                  </Link>{' '}
+                  — has the same odds of winning. Purchasing does not improve
+                  your chances; it just earns you more individual entries.
+                </p>
               </div>
             </div>
           </section>

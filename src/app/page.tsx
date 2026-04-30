@@ -73,7 +73,7 @@ export default function Home() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/images/trucks/IMG_0740.JPG.jpeg"
+            src="/images/Heroimagenew.jpg"
             alt="Specialty Built Diesel Truck"
             className="w-full h-full object-cover"
             loading="eager"
@@ -156,7 +156,7 @@ export default function Home() {
                 title: "Apparel & Merch",
                 description: "Premium Specialty Built hats, tees, hoodies, and caps. Rep the brand that builds the horsepower.",
                 icon: "🧢",
-                image: "/images/trucks/IMG_0740.JPG.jpeg",
+                image: "/images/newmerchphoto.png",
                 cta: "Shop Apparel",
                 href: "/shop?category=apparel"
               }

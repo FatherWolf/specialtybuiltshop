@@ -10,6 +10,8 @@ import { formatPrice } from '../../lib/format'
 
 // Map of permitted ?category= values (and a few aliases) to the internal filter key
 const CATEGORY_ALIASES: Record<string, string> = {
+  all: 'all',
+  everything: 'all',
   parts: 'parts',
   apparel: 'merchandise',
   merchandise: 'merchandise',
@@ -222,7 +224,7 @@ function ShopContent() {
 
   const displayProducts = shopifyProductsFormatted.length > 0 ? shopifyProductsFormatted : mockProducts
 
-  const categories = ['parts', 'merchandise', 'best-sellers']
+  const categories = ['all', 'parts', 'merchandise', 'best-sellers']
 
   // Filter by Shopify tag or product type. Set tags in Shopify admin:
   //   parts         → performance parts, engine components, anything mechanical
@@ -232,6 +234,9 @@ function ShopContent() {
     const tags: string[] = product.tags || []
     const type: string = product.productType || ''
 
+    if (category === 'all') {
+      return true
+    }
     if (category === 'parts') {
       return tags.includes('parts') ||
              tags.includes('performance') ||
@@ -280,18 +285,22 @@ function ShopContent() {
             className="text-center"
           >
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-              {filter === 'merchandise'
-                ? <>Specialty Built <span className="text-primary">Apparel</span></>
-                : filter === 'best-sellers'
-                  ? <>Best <span className="text-primary">Sellers</span></>
-                  : <>Performance <span className="text-primary">Parts</span></>}
+              {filter === 'all'
+                ? <>Shop <span className="text-primary">Everything</span></>
+                : filter === 'merchandise'
+                  ? <>Specialty Built <span className="text-primary">Apparel</span></>
+                  : filter === 'best-sellers'
+                    ? <>Best <span className="text-primary">Sellers</span></>
+                    : <>Performance <span className="text-primary">Parts</span></>}
             </h1>
             <p className="text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto">
-              {filter === 'merchandise'
-                ? 'Premium hats, tees, hoodies, and gear — rep the brand that builds the horsepower.'
-                : filter === 'best-sellers'
-                  ? 'Our top-selling parts and apparel — the gear customers keep coming back for.'
-                  : 'Performance parts and upgrade kits for Duramax, Cummins, and Powerstroke platforms.'}
+              {filter === 'all'
+                ? 'The full Specialty Built lineup — performance parts, apparel, and best sellers all in one place.'
+                : filter === 'merchandise'
+                  ? 'Premium hats, tees, hoodies, and gear — rep the brand that builds the horsepower.'
+                  : filter === 'best-sellers'
+                    ? 'Our top-selling parts and apparel — the gear customers keep coming back for.'
+                    : 'Performance parts and upgrade kits for Duramax, Cummins, and Powerstroke platforms.'}
             </p>
           </motion.div>
         </div>
