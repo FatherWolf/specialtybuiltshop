@@ -135,8 +135,7 @@ export const giveaway: Giveaway = {
 
   sponsor: {
     legalName: 'Specialty Built Performance & Fab',
-    // PLACEHOLDER ADDRESS — replace with the actual mailing address before launch
-    address: '[Sponsor Mailing Address — TO BE FILLED IN]',
+    address: '5505 Christopher Rd, Iron Station, NC 28080',
     contactEmail: 'dan@specialtybuilt.com',
   },
 
