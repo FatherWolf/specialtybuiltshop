@@ -45,7 +45,7 @@ export default function GiveawayPage() {
               {giveaway.excludedStates.length > 0
                 ? `, excluding ${giveaway.excludedStates.join(', ')}.`
                 : '.'}{' '}
-              Plus a $300 cash bonus to help cover taxes on the prize.
+              Winner&rsquo;s choice: take the custom traction bars or $1,600 cash.
             </p>
 
             {live && (
@@ -114,6 +114,23 @@ export default function GiveawayPage() {
           {/* Embed widget slot */}
           <section className="py-12 sm:py-16 bg-gray-900">
             <div className="container mx-auto px-4 sm:px-6 max-w-3xl">
+              {/* AMOE notice — required wherever purchase-based entries are advertised */}
+              <div className="bg-yellow-900/20 border border-yellow-600/40 text-yellow-100 rounded-lg p-4 mb-6 text-sm leading-relaxed">
+                <strong className="text-yellow-200">
+                  No purchase necessary.
+                </strong>{' '}
+                A purchase will not improve your chances of winning. Every
+                entry — free email, free mail-in, or any purchase-based bonus
+                entry — has the same odds of winning. Prefer to skip the
+                widget?{' '}
+                <Link
+                  href="/giveaway/mail-in"
+                  className="underline hover:text-white"
+                >
+                  Enter for free by mail →
+                </Link>
+              </div>
+
               <div className="bg-gray-800 border border-purple-500/20 rounded-xl p-6 sm:p-8 shadow-xl">
                 {giveaway.widgetEmbedHtml ? (
                   // Widget HTML comes from a config file maintained by the site
@@ -144,8 +161,12 @@ export default function GiveawayPage() {
                 Ways to Enter
               </h2>
               <p className="text-center text-gray-300 mb-10 max-w-2xl mx-auto">
-                Multiple entries allowed. Email entry is free and grants the same
-                chance to win as any paid action — no purchase necessary.
+                Multiple entries allowed. Every entry — free email, free
+                mail-in letter, or any purchase-based bonus — has the same
+                chance of winning. Purchasing does not improve your odds; it
+                just earns you more individual entries. You can match any
+                purchaser&rsquo;s entry count by mailing in additional free
+                letters.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -153,25 +174,26 @@ export default function GiveawayPage() {
                   {
                     icon: Mail,
                     title: 'Submit Email',
-                    detail: '+1 entry. Free. Required.',
+                    detail: '+1 entry. Free. Required to start.',
                     color: 'purple',
                   },
                   {
-                    icon: Instagram,
-                    title: 'Follow on Instagram',
-                    detail: '+1 bonus entry',
+                    icon: Mail,
+                    title: 'Free Mail-In Letter',
+                    detail:
+                      '+1 entry per envelope. Send as many as you like.',
                     color: 'teal',
                   },
                   {
                     icon: Users,
-                    title: 'Refer a Friend',
-                    detail: '+3 entries per friend who enters',
+                    title: 'Refer / Follow / Subscribe',
+                    detail: 'Bonus entries — see the entry widget',
                     color: 'purple',
                   },
                   {
                     icon: ShoppingBag,
                     title: 'Shop the Store',
-                    detail: '+5 per order, +1 per $25 spent',
+                    detail: '+1 per $1 spent (subtotal)',
                     color: 'teal',
                   },
                 ].map((m, i) => (

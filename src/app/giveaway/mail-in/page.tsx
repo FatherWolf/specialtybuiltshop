@@ -30,8 +30,16 @@ export default function MailInEntryPage() {
             </h1>
             <p className="text-gray-300 mb-6">
               No internet, no purchase, no problem. You can enter the{' '}
-              <strong>{giveaway.name}</strong> for free by mail. Mail-in entries
-              are weighted equally to online entries.
+              <strong>{giveaway.name}</strong> for free by mail.{' '}
+              <strong className="text-white">
+                Each mail-in entry has the same per-entry odds of winning as
+                any online entry or any purchase-based bonus entry.
+              </strong>{' '}
+              Purchasing does not improve your odds — it just earns more
+              individual entries. You can match any purchaser&rsquo;s entry
+              count by sending additional separate envelopes; there is no
+              limit on the number of envelopes one person may send during the
+              Promotion Period.
             </p>
 
             <h2 className="text-xl font-bold text-white mt-8 mb-3">
@@ -71,8 +79,14 @@ ${giveaway.sponsor.address}`}
 
             <h2 className="text-xl font-bold text-white mt-8 mb-3">Limits</h2>
             <p className="text-gray-300 mb-6">
-              Limit one (1) mail-in entry per outer mailing envelope.
-              Mechanically reproduced entries are not eligible.
+              Limit one (1) mail-in entry per outer mailing envelope.{' '}
+              <strong className="text-white">
+                There is no limit on the total number of separate envelopes
+                one person may send.
+              </strong>{' '}
+              Each separate envelope counts as one (1) entry, with the same
+              odds of winning as any other entry. Mechanically reproduced
+              entries are not eligible.
             </p>
 
             <div className="bg-gray-900 border border-gray-700 rounded-lg p-4 mt-8 text-sm text-gray-400">

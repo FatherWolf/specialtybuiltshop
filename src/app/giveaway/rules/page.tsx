@@ -112,9 +112,27 @@ export default function GiveawayRulesPage() {
             </Section>
 
             <Section title="4. How to Enter">
-              <p>During the Promotion Period, you may enter using any of the
-              methods below. Limit one (1) free email entry per person per day.
-              Bonus entries may be earned as described below.</p>
+              <p>
+                <strong>
+                  NO PURCHASE NECESSARY TO ENTER OR WIN. A PURCHASE WILL NOT
+                  IMPROVE YOUR CHANCES OF WINNING.
+                </strong>{' '}
+                Every entry — whether earned by free email submission, free
+                mail-in submission, or any purchase- or action-based bonus —
+                has the <strong>same statistical chance</strong> of being
+                selected as the winning entry. A purchaser does not have better
+                per-entry odds than a non-purchaser; a purchaser simply may
+                accumulate more individual entries. A non-purchasing entrant
+                can match any entry total by submitting additional free
+                mail-in entries (one (1) entry per separate outer mailing
+                envelope), each of which carries the same per-entry odds as any
+                paid or bonus entry.
+              </p>
+
+              <p>
+                During the Promotion Period, you may enter using any of the
+                methods below.
+              </p>
 
               <p className="font-semibold text-white mt-4">
                 a. Free Online Entry:
@@ -124,58 +142,80 @@ export default function GiveawayRulesPage() {
                 <span className="text-teal-300">
                   https://specialtybuilt.com/giveaway
                 </span>{' '}
-                and submit a valid email address through the entry form. This is
-                the standard, free method of entry. Limit one (1) such entry per
-                person per day.
-              </p>
-
-              <p className="font-semibold text-white mt-4">b. Bonus Entries:</p>
-              <p>
-                After completing a free entry, you may receive bonus entries by
-                completing one or more of the following actions during the
-                Promotion Period (entry counts subject to verification by
-                Sponsor):
-              </p>
-              <ul className="list-disc list-inside space-y-1">
-                <li>Following @specialtybuilt on Instagram (+1 entry)</li>
-                <li>
-                  Referring friends who complete a valid entry via your unique
-                  referral link (+3 entries per qualifying referral, up to a
-                  maximum of 30 referral entries per person)
-                </li>
-                <li>
-                  Making a purchase at specialtybuilt.com (+5 entries per order;
-                  additionally +1 entry per $25 spent, up to a maximum of 50 such
-                  bonus entries per person)
-                </li>
-              </ul>
-              <p>
-                <strong>
-                  All entries — whether free or earned via the bonus methods
-                  above — have an equal chance of being selected as the winning
-                  entry.
-                </strong>{' '}
-                Purchase will not increase your chances of winning beyond the
-                fixed bonus entries described.
+                and submit the requested information through the entry form.
+                This is the standard, free method of entry. Limit one (1) free
+                online entry per person per day.
               </p>
 
               <p className="font-semibold text-white mt-4">
-                c. Free Mail-In Entry (Alternative Method of Entry):
+                b. Free Mail-In Entry (Alternative Method of Entry / AMOE):
               </p>
               <p>
-                To enter without internet access or any qualifying action, hand
-                print your full name, complete street address, city, state, ZIP
-                code, daytime telephone number, email address, and date of birth
-                on a 3&rdquo; x 5&rdquo; piece of paper and mail in a #10
-                envelope to: <strong>{giveaway.name} — Mail-In Entry,
-                c/o {giveaway.sponsor.legalName}, {giveaway.sponsor.address}</strong>.
-                Limit one (1) mail-in entry per outer mailing envelope.
+                To enter without internet access or without making a purchase,
+                hand print your full name, complete street address, city, state,
+                ZIP code, daytime telephone number, email address, and date of
+                birth on a 3&rdquo; x 5&rdquo; piece of paper and mail it in a
+                #10 envelope to:{' '}
+                <strong>
+                  {giveaway.name} — Mail-In Entry, c/o{' '}
+                  {giveaway.sponsor.legalName}, {giveaway.sponsor.address}
+                </strong>
+                . Limit one (1) mail-in entry per outer mailing envelope.{' '}
+                <strong>
+                  There is no limit on the number of separate envelopes a
+                  person may send during the Promotion Period; each separate
+                  envelope counts as one (1) entry and has the same per-entry
+                  odds of winning as any other entry, including any
+                  purchase-based bonus entry.
+                </strong>{' '}
                 Mail-in entries must be postmarked by {endDate} and received by
                 Sponsor no later than seven (7) days after the end of the
-                Promotion Period to be eligible. Mechanically reproduced entries
-                are not eligible. Sponsor is not responsible for lost, late,
-                misdirected, mutilated, illegible, postage-due, or undelivered
-                mail-in entries.
+                Promotion Period to be eligible. Mechanically reproduced
+                entries are not eligible. Sponsor is not responsible for lost,
+                late, misdirected, mutilated, illegible, postage-due, or
+                undelivered mail-in entries.
+              </p>
+
+              <p className="font-semibold text-white mt-4">
+                c. Bonus Entries (Optional):
+              </p>
+              <p>
+                After completing a free entry, you may earn additional bonus
+                entries by completing one or more optional actions during the
+                Promotion Period (entry counts subject to verification by
+                Sponsor). The bonus actions available for this Promotion may
+                include, without limitation: following Sponsor on social
+                media, subscribing to Sponsor&rsquo;s newsletter, referring a
+                friend who completes a valid entry, and making a qualifying
+                purchase at specialtybuilt.com.
+              </p>
+              <p>
+                The current bonus action for purchases is:{' '}
+                <strong>
+                  one (1) entry per US$1.00 spent on order subtotal (excluding
+                  tax and shipping)
+                </strong>
+                . The complete and authoritative list of bonus actions and
+                their entry values is displayed on the entry form at{' '}
+                <span className="text-teal-300">
+                  https://specialtybuilt.com/giveaway
+                </span>{' '}
+                during the Promotion Period. Sponsor reserves the right to
+                add, remove, or modify bonus actions at any time during the
+                Promotion Period.
+              </p>
+              <p>
+                <strong>
+                  Each bonus entry — whether earned by purchase or by any free
+                  action — carries the same per-entry odds of being selected
+                  as the winning entry as any free email entry or free mail-in
+                  entry.
+                </strong>{' '}
+                Purchase will not increase your chances of winning beyond the
+                bonus entries described, and a non-purchasing entrant who
+                submits an equal number of free entries (online and/or
+                mail-in) has the same overall chance of winning as a
+                purchasing entrant with the same number of entries.
               </p>
             </Section>
 
@@ -291,10 +331,14 @@ export default function GiveawayRulesPage() {
             <Section title="11. Privacy">
               <p>
                 Information submitted with an entry is subject to
-                Sponsor&rsquo;s privacy practices. By entering, you consent to
-                Sponsor&rsquo;s collection and use of your personal information
-                as described and agree that Sponsor has the right to verify the
-                eligibility of each entrant.
+                Sponsor&rsquo;s{' '}
+                <Link href="/privacy" className="text-teal-300">
+                  Privacy Policy
+                </Link>
+                . By entering, you consent to Sponsor&rsquo;s collection and use
+                of your personal information as described in the Privacy Policy
+                and agree that Sponsor has the right to verify the eligibility
+                of each entrant.
               </p>
             </Section>
 

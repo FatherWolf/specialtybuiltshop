@@ -36,8 +36,8 @@ export type Giveaway = {
   prizeHeadline: string
 
   /** Approximate Retail Value of the full prize (USD), used in Official Rules
-   *  and IRS compliance language. Total of all components (store credit + tax
-   *  bonus + anything else). */
+   *  and IRS compliance language. Sum of every prize component the winner
+   *  receives. */
   prizeARV: number
 
   /** Detailed prize description for legal use in Official Rules. */
@@ -109,24 +109,25 @@ export function formatGiveawayDateTime(iso: string): string {
  * Edit this object to launch a new campaign.
  */
 export const giveaway: Giveaway = {
-  active: false,
+  active: true,
 
-  name: 'Specialty Built $1,500 Giveaway',
+  name: 'Specialty Built Custom Traction Bars Giveaway',
 
-  prizeHeadline: 'Win $1,500 in Specialty Built store credit',
+  prizeHeadline: 'Win a custom set of Traction Bars — or $1,600 cash',
 
-  prizeARV: 1800,
+  prizeARV: 1600,
 
   prizeDescription:
-    'One (1) winner will receive: (a) one $1,500 USD Specialty Built ' +
-    'Performance & Fab store credit, redeemable at specialtybuilt.com only, ' +
-    'with no cash value, non-transferable, and expiring twelve (12) months ' +
-    'from issuance; and (b) $300 USD cash bonus paid via PayPal or check, ' +
-    'intended to assist with associated tax obligations. ' +
-    'Approximate Retail Value (ARV): $1,800 USD. ' +
+    'One (1) winner will receive their choice of: (a) one (1) custom-built ' +
+    'set of Specialty Built traction bars, fabricated to fit the ' +
+    'winner’s truck specifications and including standard installation ' +
+    'hardware (Approximate Retail Value: $1,600 USD); OR (b) one thousand ' +
+    'six hundred dollars ($1,600 USD) cash equivalent, paid via PayPal or ' +
+    'check at the winner’s election. ' +
+    'Approximate Retail Value (ARV): $1,600 USD. ' +
     'All federal, state, and local taxes on the prize are the sole ' +
     'responsibility of the winner. Sponsor will issue IRS Form 1099-MISC ' +
-    'reporting the prize value.',
+    'reporting the prize value if applicable.',
 
   // PLACEHOLDER DATES — update before launch
   startDate: '2026-05-01T00:00:00Z',
@@ -143,7 +144,8 @@ export const giveaway: Giveaway = {
 
   minAge: 18,
 
-  widgetEmbedHtml: '',
+  widgetEmbedHtml:
+    '<div id="vsscript_225789_148755"></div><script async type="text/javascript" src="https://app.viralsweep.com/vsa-widget-b22ef6-225789.js?sid=225789_148755"></script>',
 
   externalRulesUrl: null,
 
