@@ -109,7 +109,8 @@ export function formatGiveawayDateTime(iso: string): string {
  * Edit this object to launch a new campaign.
  */
 export const giveaway: Giveaway = {
-  active: true,
+  // Postponed — flip to true to re-launch next month.
+  active: false,
 
   name: 'Specialty Built Custom Traction Bars Giveaway',
 

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { Instagram, Facebook } from 'lucide-react';
+import { giveaway, isGiveawayLive } from '../lib/giveaway';
 
 // TikTok isn't in lucide-react, so inline the official wordmark glyph.
 function TikTokIcon({ className = '' }: { className?: string }) {
@@ -40,6 +41,9 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  // Hide Sweepstakes Rules link when there's no active campaign — keeps the
+  // footer clean during postponements without removing the page entirely.
+  const giveawayLive = isGiveawayLive(giveaway);
   return (
     <footer className="bg-slate-900 text-white py-12">
       <div className="container mx-auto px-6">
@@ -75,7 +79,9 @@ export default function Footer() {
               <li><Link href="/shop?category=apparel" className="text-slate-400 hover:text-white transition-colors">Apparel</Link></li>
               <li><Link href="/about" className="text-slate-400 hover:text-white transition-colors">About</Link></li>
               <li><Link href="/contact" className="text-slate-400 hover:text-white transition-colors">Contact</Link></li>
-              <li><Link href="/giveaway/rules" className="text-slate-400 hover:text-white transition-colors">Sweepstakes Rules</Link></li>
+              {giveawayLive && (
+                <li><Link href="/giveaway/rules" className="text-slate-400 hover:text-white transition-colors">Sweepstakes Rules</Link></li>
+              )}
               <li><Link href="/privacy" className="text-slate-400 hover:text-white transition-colors">Privacy Policy</Link></li>
             </ul>
           </div>
