@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Phone, Mail, Clock, Send, Loader2 } from 'lucide-react'
+import { Phone, Mail, Clock, MapPin, Send, Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -144,6 +144,21 @@ export default function Contact() {
                     <h3 className="font-semibold text-foreground mb-1">Phone</h3>
                     <p className="text-foreground/70">(980) 241-4823</p>
                     <p className="text-sm text-foreground/60">Call or text — usually a reply within 24 hours</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="bg-primary/10 p-3 rounded-lg">
+                    <MapPin className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground mb-1">Business Address</h3>
+                    <p className="text-foreground/70">
+                      Specialty Built Performance &amp; Fab<br />
+                      5505 Christopher Rd<br />
+                      Iron Station, NC 28080
+                    </p>
+                    <p className="text-sm text-foreground/60">Mailing address — shop is by appointment only</p>
                   </div>
                 </div>
 
