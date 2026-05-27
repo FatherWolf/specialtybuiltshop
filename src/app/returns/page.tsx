@@ -57,8 +57,8 @@ export default function ReturnsPage() {
             <Section title="1. Return Window">
               <p>
                 You may request a return within{' '}
-                <strong className="text-white">30 days</strong> of the delivery
-                date for most in-stock items. Returns initiated after 30 days
+                <strong className="text-white">10 days</strong> of the delivery
+                date for most in-stock items. Returns initiated after 10 days
                 will not be accepted unless required by law.
               </p>
             </Section>
@@ -196,7 +196,7 @@ export default function ReturnsPage() {
               <p>
                 We do not charge a restocking fee on standard returns of
                 in-stock items returned in original condition within the
-                30-day window. Returns that arrive damaged, used, or missing
+                10-day window. Returns that arrive damaged, used, or missing
                 parts may be subject to a deduction reflecting the loss of
                 value, or may be rejected entirely.
               </p>
