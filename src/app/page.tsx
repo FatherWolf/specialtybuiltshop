@@ -8,6 +8,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ProductModal from '../components/ProductModal';
 import GiveawayBanner from '../components/GiveawayBanner';
+import GiveawayModal from '../components/GiveawayModal';
 import { formatPrice } from '../lib/format';
 
 const fallbackProducts = [
@@ -67,6 +68,7 @@ export default function Home() {
     <div className="min-h-screen bg-gray-900">
       <Header />
       <GiveawayBanner />
+      <GiveawayModal />
 
       {/* Hero Section with Background Image */}
       <section className="relative min-h-screen bg-gradient-to-br from-purple-900/80 via-blue-900/80 to-teal-800/80 text-white overflow-hidden">
