@@ -47,6 +47,12 @@ export type Giveaway = {
   startDate: string
   endDate: string
 
+  /** Optional human-friendly end-date label shown to users (e.g. "June 30
+   *  at midnight"). When omitted, callers fall back to formatGiveawayDate()
+   *  on `endDate`. Useful when the precise endDate timestamp (e.g. midnight
+   *  ET = 4 AM UTC the next day) would render as a confusing date in the UI. */
+  endDateLabel?: string
+
   /** Sponsor info for legal compliance. Must be the exact legal entity. */
   sponsor: {
     legalName: string
@@ -133,6 +139,7 @@ export const giveaway: Giveaway = {
   // End:   midnight ET on 2026-06-30 going into 2026-07-01 = 2026-07-01T04:00:00Z
   startDate: '2026-05-29T04:00:00Z',
   endDate: '2026-07-01T04:00:00Z',
+  endDateLabel: 'June 30 at midnight',
 
   sponsor: {
     legalName: 'Specialty Built Performance & Fab',

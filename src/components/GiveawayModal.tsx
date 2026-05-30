@@ -150,7 +150,7 @@ export default function GiveawayModal() {
               </p>
 
               <p className="text-xs text-gray-400 mb-6">
-                Ends {formatGiveawayDate(giveaway.endDate)}
+                Ends {giveaway.endDateLabel ?? formatGiveawayDate(giveaway.endDate)}
               </p>
 
               <Link
