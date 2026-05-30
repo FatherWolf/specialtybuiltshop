@@ -137,9 +137,15 @@ export default function GiveawayPageClient() {
       {/* Live state — entry widget + how-to */}
       {live && (
         <>
-          {/* Embed widget slot */}
+          {/* Embed widget slot.
+              Mobile-conscious padding: the ViralSweep widget's CAPTCHA
+              (~304px) is wider than a comfortable container on small
+              phones. We trim horizontal padding on mobile so the widget
+              has room to breathe, then layer an overflow-x-auto safety
+              net for any future widget that exceeds even the trimmed
+              width. */}
           <section className="py-12 sm:py-16 bg-gray-900">
-            <div className="container mx-auto px-4 sm:px-6 max-w-3xl">
+            <div className="container mx-auto px-2 sm:px-6 max-w-3xl">
               {/* AMOE notice — required wherever purchase-based entries are advertised */}
               <div className="bg-yellow-900/20 border border-yellow-600/40 text-yellow-100 rounded-lg p-4 mb-6 text-sm leading-relaxed">
                 <strong className="text-yellow-200">
@@ -157,7 +163,7 @@ export default function GiveawayPageClient() {
                 </Link>
               </div>
 
-              <div className="bg-gray-800 border border-purple-500/20 rounded-xl p-6 sm:p-8 shadow-xl">
+              <div className="bg-gray-800 border border-purple-500/20 rounded-xl p-3 sm:p-8 shadow-xl">
                 {giveaway.widgetEmbedHtml ? (
                   // Widget HTML comes from a config file maintained by the site
                   // owner — never user input — so dangerouslySetInnerHTML is
@@ -166,9 +172,13 @@ export default function GiveawayPageClient() {
                   // would otherwise cause a hydration mismatch on subsequent
                   // navigations. The useEffect above re-instantiates any
                   // <script> tags so the loader actually runs.
+                  // overflow-x-auto is the safety net for any embedded
+                  // element (e.g. CAPTCHA iframe) that still exceeds the
+                  // container width on the smallest phones.
                   <div
                     ref={widgetRef}
                     suppressHydrationWarning
+                    className="w-full overflow-x-auto -mx-1 sm:mx-0 px-1 sm:px-0"
                     dangerouslySetInnerHTML={
                       mounted
                         ? { __html: giveaway.widgetEmbedHtml }
