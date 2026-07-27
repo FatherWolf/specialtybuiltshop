@@ -84,10 +84,28 @@ export async function POST(request) {
         ? item.variantId
         : `gid://shopify/ProductVariant/${item.variantId}`;
 
-      return {
+      const line = {
         merchandiseId: globalVariantId,
         quantity: item.quantity
       };
+
+      // Line-item attributes surface on the Shopify order (admin order
+      // detail, packing slips, and order confirmation emails) so the shop
+      // knows what finish/engraving the buyer asked for. The product-page
+      // textarea already caps input at Shopify's 255-char attribute limit;
+      // the slice here is a backstop against a hand-crafted request body,
+      // since exceeding the cap makes Shopify reject the whole cart.
+      const customText = typeof item.customText === 'string'
+        ? item.customText.trim()
+        : '';
+
+      if (customText) {
+        line.attributes = [
+          { key: 'Customization', value: customText.slice(0, 255) }
+        ];
+      }
+
+      return line;
     });
 
     const variables = {

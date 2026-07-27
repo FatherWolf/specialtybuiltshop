@@ -9,6 +9,11 @@ interface CartItem {
   price: string
   quantity: number
   image?: string
+  /** Free-text customization the buyer typed on the product page (powder
+   *  coat color, engraving text, etc.). Travels to Shopify as a line-item
+   *  attribute so it lands on the order in Shopify Admin. Undefined or ''
+   *  means no customization was requested. */
+  customText?: string
 }
 
 /** Lightweight notification surfaced by <CartToast />. Set by addItem. */
@@ -36,6 +41,28 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
+/**
+ * Normalize customization text for comparison. Undefined, empty, and
+ * whitespace-only all collapse to '' so they're treated as "no
+ * customization" and merge into the same cart line.
+ */
+function normalizeCustomText(text?: string): string {
+  return (text ?? '').trim()
+}
+
+/**
+ * Two cart entries merge only when they're the same variant AND carry the
+ * same customization. A buyer ordering one bracket in gloss black and
+ * another in candy red must get two separate lines — otherwise the
+ * fabricator can't tell which is which on the Shopify order.
+ */
+function isSameLine(a: CartItem, b: CartItem): boolean {
+  return (
+    a.variantId === b.variantId &&
+    normalizeCustomText(a.customText) === normalizeCustomText(b.customText)
+  )
+}
+
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
   const [notification, setNotification] = useState<CartNotification | null>(null)
@@ -55,10 +82,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const addItem = (newItem: CartItem) => {
     setItems(prevItems => {
-      const existingItem = prevItems.find(item => item.variantId === newItem.variantId)
+      const existingItem = prevItems.find(item => isSameLine(item, newItem))
       if (existingItem) {
         return prevItems.map(item =>
-          item.variantId === newItem.variantId
+          isSameLine(item, newItem)
             ? { ...item, quantity: item.quantity + newItem.quantity }
             : item
         )

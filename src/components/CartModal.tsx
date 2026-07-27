@@ -28,7 +28,10 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
         body: JSON.stringify({
           items: items.map(item => ({
             variantId: item.variantId,
-            quantity: item.quantity
+            quantity: item.quantity,
+            // Forwarded to Shopify as a line-item attribute so the
+            // customization lands on the order in Shopify Admin.
+            customText: item.customText
           }))
         })
       })
@@ -155,6 +158,16 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
                           <p className="text-sm text-gray-500">
                             ${formatPrice(item.price)} each
                           </p>
+                          {item.customText && (
+                            // Not truncated — the buyer needs to be able to
+                            // proofread what they typed before checking out.
+                            <p className="text-xs text-gray-600 mt-1 whitespace-pre-wrap break-words">
+                              <span className="font-medium text-gray-700">
+                                Customization:
+                              </span>{' '}
+                              {item.customText}
+                            </p>
+                          )}
                         </div>
 
                         {/* Quantity Controls */}

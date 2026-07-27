@@ -28,12 +28,42 @@ function isVariantAvailable(variant: any): boolean {
   return true
 }
 
+/**
+ * Max characters accepted in the customization box.
+ *
+ * Matched to Shopify's 255-char cap on line-item attribute values. Keeping
+ * the UI limit identical means what the buyer types is exactly what reaches
+ * the order — no silent truncation between the cart and Shopify Admin.
+ */
+const CUSTOM_TEXT_MAX = 255
+
+/**
+ * Shopify tags that opt a product into the free-text customization box.
+ * Tag a product "customizable" (or any alias below) in Shopify Admin and
+ * the field appears on the site — no deploy required.
+ */
+const CUSTOMIZABLE_TAGS = ['customizable', 'custom', 'made-to-order']
+
+/**
+ * True when the product carries a customization tag. Tag matching is
+ * case- and whitespace-insensitive since Shopify preserves whatever the
+ * admin typed.
+ */
+function isCustomizable(product: any): boolean {
+  const tags: unknown = product?.tags
+  if (!Array.isArray(tags)) return false
+  return tags.some((tag) =>
+    CUSTOMIZABLE_TAGS.includes(String(tag).trim().toLowerCase())
+  )
+}
+
 export default function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
   const [selectedVariant, setSelectedVariant] = useState<any>(null)
   const [selectedImage, setSelectedImage] = useState(0)
   const [quantity, setQuantity] = useState(1)
   const [productDetails, setProductDetails] = useState<any>(null)
   const [loading, setLoading] = useState(true)
+  const [customText, setCustomText] = useState('')
   const { addItem } = useCart()
 
   useEffect(() => {
@@ -46,6 +76,8 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
     if (!product?.id) return
 
     setLoading(true)
+    // Fresh product opened — drop any customization typed for the previous one.
+    setCustomText('')
     // Use static product data for clean display
     setProductDetails(product)
     if (product.variants && product.variants.length > 0) {
@@ -64,6 +96,7 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
   const displayProduct = productDetails || product
   const images = displayProduct.images || []
   const variants = displayProduct.variants || []
+  const customizable = isCustomizable(displayProduct)
 
   // Group variants by color/option
   const variantOptions = variants.reduce((acc: any, variant: any) => {
@@ -97,13 +130,23 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
     if (!isVariantAvailable(selectedVariant)) return;
 
     try {
+      // Only attach customization when this product opted in via tag AND
+      // the buyer actually typed something.
+      const trimmedCustom = customizable ? customText.trim() : ''
+
       addItem({
-        id: `${displayProduct.id}-${selectedVariant.id}`,
+        // Custom text is part of the identity: the same variant ordered with
+        // two different finishes must be two distinct cart lines, so the id
+        // has to differ too (removeItem/updateQuantity key off it).
+        id: trimmedCustom
+          ? `${displayProduct.id}-${selectedVariant.id}-${trimmedCustom}`
+          : `${displayProduct.id}-${selectedVariant.id}`,
         variantId: selectedVariant.id,
         title: displayProduct.title,
         price: selectedVariant.price?.amount || selectedVariant.price || '29.99',
         quantity: quantity,
-        image: displayProduct.images?.[0]?.src || displayProduct.images?.[0]
+        image: displayProduct.images?.[0]?.src || displayProduct.images?.[0],
+        ...(trimmedCustom ? { customText: trimmedCustom } : {})
       });
 
       // Confirmation feedback is handled by <CartToast /> (mounted in the
@@ -271,6 +314,51 @@ export default function ProductModal({ product, isOpen, onClose }: ProductModalP
                       </div>
                     )}
 
+
+                    {/* Customization box — only for products tagged
+                        "customizable" in Shopify. Text rides along to the
+                        Shopify order as a line-item property so the shop
+                        sees exactly what the buyer asked for. */}
+                    {customizable && (
+                      <div>
+                        <label
+                          htmlFor="product-custom-text"
+                          className="block font-semibold mb-2 text-white"
+                        >
+                          Customize It{' '}
+                          <span className="font-normal text-gray-400 text-sm">
+                            (optional)
+                          </span>
+                        </label>
+                        <p className="text-sm text-gray-400 mb-3 leading-relaxed">
+                          Powder coat color, engraving text, or any special
+                          instructions for your build. Leave blank for the
+                          standard finish.
+                        </p>
+                        <textarea
+                          id="product-custom-text"
+                          value={customText}
+                          onChange={(e) =>
+                            setCustomText(e.target.value.slice(0, CUSTOM_TEXT_MAX))
+                          }
+                          maxLength={CUSTOM_TEXT_MAX}
+                          rows={3}
+                          placeholder="e.g. Gloss black powder coat, satin clear on the logo"
+                          className="w-full px-4 py-3 bg-gray-900 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-y"
+                        />
+                        <div className="flex justify-end mt-1">
+                          <span
+                            className={`text-xs ${
+                              customText.length >= CUSTOM_TEXT_MAX
+                                ? 'text-yellow-400'
+                                : 'text-gray-500'
+                            }`}
+                          >
+                            {customText.length}/{CUSTOM_TEXT_MAX}
+                          </span>
+                        </div>
+                      </div>
+                    )}
 
                     {/* Quantity Selector */}
                     <div>
